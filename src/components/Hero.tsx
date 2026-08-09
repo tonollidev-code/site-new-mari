@@ -79,7 +79,7 @@ export const Hero: React.FC = () => {
               <div className="relative bg-white p-3 rounded-3xl border-2 border-[#E5C158]/40 shadow-2xl overflow-hidden">
                 {/* Hero Image */}
                 <img
-                  src="https://i.postimg.cc/kGWZJrz6/Whats-App-Image-2026-08-08-at-16-40-35-(1).jpg"
+                  src="https://i.postimg.cc/nV3rtCBW/Whats-App-Image-2026-08-08-at-16-40-35-(1).jpg"
                   referrerPolicy="no-referrer"
                   alt="Unhas em gel com durabilidade feitas pela Mari Nail Designer"
                   className="w-full h-[380px] sm:h-[460px] object-cover rounded-2xl transform hover:scale-102 transition-transform duration-700"
