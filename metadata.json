@@ -1,0 +1,6 @@
+{
+  "name": "Mari Nail Designer",
+  "description": "Site profissional para estúdio de unhas, agendamento online, galeria de fotos e serviços de nail design em gel e fibra.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

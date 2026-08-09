@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-delicate: 'Cormorant Garamond', Georgia, serif;
+    --font-script: 'Alex Brush', cursive;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+  }
+  
+  h1, h2, h3, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-delicate {
+    font-family: var(--font-delicate);
+  }
+
+  .font-script {
+    font-family: var(--font-script);
+  }
+}
+
+/* Custom Gold & Nude Luxury Utilities */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #E5C158 0%, #F5E5C9 50%, #C5A059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #E5C158 0%, #F5E5C9 50%, #C5A059 100%);
+}
+
+.bg-gold-subtle {
+  background: linear-gradient(135deg, rgba(229, 193, 88, 0.12) 0%, rgba(245, 229, 201, 0.05) 100%);
+}
+
+.border-gold-glow {
+  box-shadow: 0 0 15px rgba(229, 193, 88, 0.25);
+}
+
+.gold-border {
+  border-color: rgba(229, 193, 88, 0.35);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FCFAF7;
+}
+::-webkit-scrollbar-thumb {
+  background: #E2D3C1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
