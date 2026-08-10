@@ -6,8 +6,6 @@ import instaFibra from '../assets/images/insta_fibra_vidro_1786309964065.jpg';
 import instaMoldeF1 from '../assets/images/insta_molde_f1_1786309980233.jpg';
 import instaBanhoGel from '../assets/images/insta_banho_gel_1786309994315.jpg';
 import instaEsmaltacao from '../assets/images/insta_esmaltacao_gel_1786310009032.jpg';
-import instaNailArt from '../assets/images/insta_nail_art_1786310028186.jpg';
-import instaEstudio from '../assets/images/insta_estudio_work_1786310045353.jpg';
 
 export const InstagramGrid: React.FC = () => {
   const { config } = useApp();
@@ -41,20 +39,6 @@ export const InstagramGrid: React.FC = () => {
       likes: '601',
       comments: '52'
     },
-    {
-      id: 5,
-      image: instaNailArt,
-      title: 'Nail Art Encapsulada Delicada',
-      likes: '475',
-      comments: '31'
-    },
-    {
-      id: 6,
-      image: instaEstudio,
-      title: 'Bastidores no Estúdio Mari Nail Designer',
-      likes: '340',
-      comments: '24'
-    }
   ];
 
   return (
@@ -75,8 +59,8 @@ export const InstagramGrid: React.FC = () => {
           </p>
         </div>
 
-        {/* 6 Grid Images */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
+        {/* 4 Grid Images */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
           {instaPosts.map((post) => (
             <a
               key={post.id}
