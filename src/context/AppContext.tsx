@@ -20,6 +20,12 @@ interface AppContextType {
   isAdminOpen: boolean;
   setIsAdminOpen: (open: boolean) => void;
   
+  // Admin Auth State
+  adminEmail: string | null;
+  isAuthorizedAdmin: boolean;
+  loginAdmin: (email: string) => boolean;
+  logoutAdmin: () => void;
+  
   // Actions
   addBooking: (booking: Omit<BookingData, 'id' | 'createdAt' | 'status'>) => BookingData;
   updateBookingStatus: (id: string, status: 'pending' | 'confirmed' | 'cancelled') => void;
@@ -114,6 +120,28 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [selectedServiceForBooking, setSelectedServiceForBooking] = useState<ServiceItem | null>(null);
   const [lightboxImage, setLightboxImage] = useState<GalleryItem | null>(null);
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
+
+  const [adminEmail, setAdminEmail] = useState<string | null>(() => {
+    return localStorage.getItem('mari_nail_admin_email');
+  });
+
+  const ALLOWED_ADMIN_EMAIL = 'tonollibrenno@gmail.com';
+  const isAuthorizedAdmin = adminEmail?.toLowerCase() === ALLOWED_ADMIN_EMAIL.toLowerCase();
+
+  const loginAdmin = (email: string) => {
+    const formatted = email.trim().toLowerCase();
+    if (formatted === ALLOWED_ADMIN_EMAIL.toLowerCase()) {
+      setAdminEmail(ALLOWED_ADMIN_EMAIL);
+      localStorage.setItem('mari_nail_admin_email', ALLOWED_ADMIN_EMAIL);
+      return true;
+    }
+    return false;
+  };
+
+  const logoutAdmin = () => {
+    setAdminEmail(null);
+    localStorage.removeItem('mari_nail_admin_email');
+  };
 
   // Sync state to local storage
   useEffect(() => {
@@ -227,6 +255,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setLightboxImage,
         isAdminOpen,
         setIsAdminOpen,
+        adminEmail,
+        isAuthorizedAdmin,
+        loginAdmin,
+        logoutAdmin,
         addBooking,
         updateBookingStatus,
         updateServicePrice,

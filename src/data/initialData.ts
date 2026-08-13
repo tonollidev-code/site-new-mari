@@ -1,8 +1,8 @@
 import { ServiceItem, GalleryItem, Testimonial, FAQItem, StudioConfig, Coupon, BlogPost } from '../types';
 
 export const INITIAL_CONFIG: StudioConfig = {
-  whatsappNumber: '5511974030615',
-  whatsappDisplay: '(11) 97403-0615',
+  whatsappNumber: '5511995866952',
+  whatsappDisplay: '(11) 99586-6952',
   instagramHandle: '@leonesnail',
   address: 'Rua São Vicente das Minas, 47',
   addressShort: 'Rua São Vicente das Minas, 47',

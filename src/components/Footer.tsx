@@ -1,9 +1,9 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { Instagram, MapPin, Phone, Clock, Heart, Settings } from 'lucide-react';
+import { Instagram, MapPin, Phone, Clock, Heart, Settings, Lock } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const { config, scrollToSection, setIsAdminOpen } = useApp();
+  const { config, scrollToSection, setIsAdminOpen, isAuthorizedAdmin } = useApp();
 
   const quickLinks = [
     { label: 'Início', id: 'hero' },
@@ -47,15 +47,17 @@ export const Footer: React.FC = () => {
               Atendimento exclusivo e de altíssimo nível para mulheres que valorizam elegância, sofisticação e biossegurança na saúde das suas unhas.
             </p>
 
-            <div className="pt-2">
-              <button
-                onClick={() => setIsAdminOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#6E4936] hover:bg-[#825741] text-[#FFC800] text-xs font-bold uppercase tracking-wider border border-[#FFC800]/30 transition-colors"
-              >
-                <Settings className="w-3.5 h-3.5" />
-                <span>Painel da Mari</span>
-              </button>
-            </div>
+            {isAuthorizedAdmin && (
+              <div className="pt-2">
+                <button
+                  onClick={() => setIsAdminOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#6E4936] hover:bg-[#825741] text-[#FFC800] text-xs font-bold uppercase tracking-wider border border-[#FFC800]/30 transition-colors"
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                  <span>Painel da Mari</span>
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Quick Links Column */}
@@ -109,7 +111,18 @@ export const Footer: React.FC = () => {
 
         {/* Copyright Line */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-400 gap-4 text-center sm:text-left">
-          <p>© 2026 Mari Nail Designer. Todos os direitos reservados.</p>
+          <div className="flex items-center gap-2">
+            <p>© 2026 Mari Nail Designer. Todos os direitos reservados.</p>
+            {!isAuthorizedAdmin && (
+              <button
+                onClick={() => setIsAdminOpen(true)}
+                className="text-gray-500 hover:text-gray-300 transition-colors p-1"
+                title="Acesso Restrito"
+              >
+                <Lock className="w-3 h-3" />
+              </button>
+            )}
+          </div>
           <p className="flex items-center gap-1">
             Feito com <Heart className="w-3.5 h-3.5 text-rose-500 fill-current" /> para realçar sua beleza.
           </p>

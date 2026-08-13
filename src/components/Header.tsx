@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { Menu, X, Calendar, MapPin, Phone, Instagram, Sparkles, Settings } from 'lucide-react';
 
 export const Header: React.FC = () => {
-  const { config, scrollToSection, setIsAdminOpen } = useApp();
+  const { config, scrollToSection, setIsAdminOpen, isAuthorizedAdmin } = useApp();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -61,14 +61,16 @@ export const Header: React.FC = () => {
               <Instagram className="w-3.5 h-3.5" />
               <span>{config.instagramHandle}</span>
             </a>
-            <button
-              onClick={() => setIsAdminOpen(true)}
-              className="ml-2 px-2 py-0.5 rounded bg-[#6E4936] hover:bg-[#825741] text-[#E5C158] text-[10px] uppercase tracking-wider border border-[#E5C158]/30 flex items-center gap-1 transition-colors"
-              title="Painel Administrativo"
-            >
-              <Settings className="w-3 h-3" />
-              <span>Painel</span>
-            </button>
+            {isAuthorizedAdmin && (
+              <button
+                onClick={() => setIsAdminOpen(true)}
+                className="ml-2 px-2 py-0.5 rounded bg-[#6E4936] hover:bg-[#825741] text-[#E5C158] text-[10px] uppercase tracking-wider border border-[#E5C158]/30 flex items-center gap-1 transition-colors"
+                title="Painel Administrativo"
+              >
+                <Settings className="w-3 h-3" />
+                <span>Painel</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -201,16 +203,18 @@ export const Header: React.FC = () => {
                   <span>Agendar Meu Horário</span>
                 </button>
 
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setIsAdminOpen(true);
-                  }}
-                  className="w-full bg-[#F8F5F2] hover:bg-[#EADEDA] text-[#523626] py-2.5 rounded-full font-bold text-xs uppercase tracking-wider border border-[#E5C158]/30 flex items-center justify-center gap-2"
-                >
-                  <Settings className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>Painel Administrativo</span>
-                </button>
+                {isAuthorizedAdmin && (
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setIsAdminOpen(true);
+                    }}
+                    className="w-full bg-[#F8F5F2] hover:bg-[#EADEDA] text-[#523626] py-2.5 rounded-full font-bold text-xs uppercase tracking-wider border border-[#E5C158]/30 flex items-center justify-center gap-2"
+                  >
+                    <Settings className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <span>Painel Administrativo</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>

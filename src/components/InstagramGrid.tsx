@@ -2,11 +2,6 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { Instagram, ExternalLink } from 'lucide-react';
 
-import instaFibra from '../assets/images/insta_fibra_vidro_1786309964065.jpg';
-import instaMoldeF1 from '../assets/images/insta_molde_f1_1786309980233.jpg';
-import instaBanhoGel from '../assets/images/insta_banho_gel_1786309994315.jpg';
-import instaEsmaltacao from '../assets/images/insta_esmaltacao_gel_1786310009032.jpg';
-
 export const InstagramGrid: React.FC = () => {
   const { config } = useApp();
 
@@ -38,7 +33,7 @@ export const InstagramGrid: React.FC = () => {
       title: 'Esmaltação em Gel Vermelho Luxo',
       likes: '601',
       comments: '52'
-    },
+    }
   ];
 
   return (
@@ -60,7 +55,7 @@ export const InstagramGrid: React.FC = () => {
         </div>
 
         {/* 4 Grid Images */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 mb-10">
           {instaPosts.map((post) => (
             <a
               key={post.id}
