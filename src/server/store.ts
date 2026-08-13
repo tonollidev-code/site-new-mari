@@ -136,7 +136,17 @@ class Store {
 
   // Users
   getUserByEmail(email: string): User | undefined {
-    return this.data.users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const user = this.data.users.find((u) => u.email.toLowerCase() === cleanEmail);
+    if (user) {
+      if (
+        cleanEmail === 'tonollibrenno@gmail.com' ||
+        (process.env.ADMIN_EMAIL && cleanEmail === process.env.ADMIN_EMAIL.toLowerCase())
+      ) {
+        user.role = 'admin';
+      }
+    }
+    return user;
   }
 
   getUserById(id: string): User | undefined {

@@ -107,6 +107,7 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
 
   return res.json({
     user: payload,
+    token,
     message: 'Login realizado com sucesso.',
   });
 });

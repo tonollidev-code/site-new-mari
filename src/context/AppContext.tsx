@@ -69,10 +69,39 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, []);
 
   // Auth State
-  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => {
+    try {
+      const saved = localStorage.getItem('mari_nail_auth_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
   const [authLoading, setAuthLoading] = useState<boolean>(true);
 
   const isAuthorizedAdmin = currentUser?.role === 'admin';
+
+  // Safe Diagnostic Logging (Requirement #7)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      console.log('🔍 [MariNail Auth Diagnostic]:', {
+        authenticated: Boolean(currentUser),
+        userIdPresent: Boolean(currentUser?.id),
+        detectedRole: currentUser?.role || 'nenhuma',
+        isAuthorizedAdmin,
+      });
+    }
+  }, [currentUser, isAuthorizedAdmin]);
+
+  // Auth Headers helper
+  const getAuthHeaders = (): Record<string, string> => {
+    const token = localStorage.getItem('mari_nail_auth_token');
+    const headers: Record<string, string> = {};
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    return headers;
+  };
 
   // Core Data
   const [config, setConfig] = useState<StudioConfig>(INITIAL_CONFIG);
@@ -95,10 +124,22 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const fetchInitial = async () => {
       try {
         // Fetch current user auth state
-        const meRes = await fetch('/api/auth/me', { credentials: 'include' });
+        const headers = getAuthHeaders();
+        const meRes = await fetch('/api/auth/me', { credentials: 'include', headers });
         if (meRes.ok) {
           const meData = await meRes.json();
-          setCurrentUser(meData.user || null);
+          if (meData?.user) {
+            setCurrentUser(meData.user);
+            localStorage.setItem('mari_nail_auth_user', JSON.stringify(meData.user));
+          } else {
+            setCurrentUser(null);
+            localStorage.removeItem('mari_nail_auth_user');
+            localStorage.removeItem('mari_nail_auth_token');
+          }
+        } else {
+          setCurrentUser(null);
+          localStorage.removeItem('mari_nail_auth_user');
+          localStorage.removeItem('mari_nail_auth_token');
         }
 
         // Fetch services
@@ -141,13 +182,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     const fetchAdminData = async () => {
       try {
-        const bRes = await fetch('/api/admin/bookings', { credentials: 'include' });
+        const headers = getAuthHeaders();
+        const bRes = await fetch('/api/admin/bookings', { credentials: 'include', headers });
         if (bRes.ok) {
           const bData = await bRes.json();
           setBookings(bData);
         }
 
-        const blkRes = await fetch('/api/admin/blocked-slots', { credentials: 'include' });
+        const blkRes = await fetch('/api/admin/blocked-slots', { credentials: 'include', headers });
         if (blkRes.ok) {
           const blkData = await blkRes.json();
           setBlockedSlots(blkData);
@@ -177,7 +219,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         return { success: false, error: data.error || 'Falha no login.' };
       }
 
-      setCurrentUser(data.user);
+      if (data.token) {
+        localStorage.setItem('mari_nail_auth_token', data.token);
+      }
+      if (data.user) {
+        localStorage.setItem('mari_nail_auth_user', JSON.stringify(data.user));
+        setCurrentUser(data.user);
+      }
+
       return { success: true };
     } catch (err) {
       return { success: false, error: 'Erro de conexão com o servidor.' };
@@ -186,10 +235,16 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const logoutAdmin = async (): Promise<void> => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+        headers: getAuthHeaders(),
+      });
     } catch {
       // ignore error
     } finally {
+      localStorage.removeItem('mari_nail_auth_token');
+      localStorage.removeItem('mari_nail_auth_user');
       setCurrentUser(null);
       navigate('/');
     }
@@ -225,7 +280,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       const res = await fetch(`/api/admin/bookings/${id}/status`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
         credentials: 'include',
         body: JSON.stringify({ status }),
       });
@@ -244,7 +299,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       const res = await fetch('/api/admin/services', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
         credentials: 'include',
         body: JSON.stringify(serviceData),
       });
@@ -264,7 +319,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       const res = await fetch(`/api/admin/services/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
         credentials: 'include',
         body: JSON.stringify(updates),
       });
@@ -282,6 +337,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       const res = await fetch(`/api/admin/services/${id}`, {
         method: 'DELETE',
+        headers: getAuthHeaders(),
         credentials: 'include',
       });
 
@@ -298,7 +354,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       const res = await fetch('/api/admin/business-hours', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
         credentials: 'include',
         body: JSON.stringify(updates),
       });
@@ -316,7 +372,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       const res = await fetch('/api/admin/blocked-slots', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
         credentials: 'include',
         body: JSON.stringify({ date, timeSlot, reason }),
       });
@@ -334,6 +390,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       const res = await fetch(`/api/admin/blocked-slots/${id}`, {
         method: 'DELETE',
+        headers: getAuthHeaders(),
         credentials: 'include',
       });
 
@@ -350,7 +407,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       const res = await fetch('/api/admin/config', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
         credentials: 'include',
         body: JSON.stringify(newConfig),
       });
