@@ -4,8 +4,8 @@ import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle, Sparkles } from 'luci
 
 export const AdminLoginPage: React.FC = () => {
   const { loginAdmin, navigate } = useApp();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('tonollibrenno@gmail.com');
+  const [password, setPassword] = useState('admin123');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 

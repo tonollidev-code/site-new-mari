@@ -135,28 +135,31 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     fetchInitial();
   }, []);
 
-  // Fetch admin data whenever admin logs in
+  // Fetch admin data whenever admin logs in and poll for updates
   useEffect(() => {
-    if (isAuthorizedAdmin) {
-      const fetchAdminData = async () => {
-        try {
-          const bRes = await fetch('/api/admin/bookings', { credentials: 'include' });
-          if (bRes.ok) {
-            const bData = await bRes.json();
-            setBookings(bData);
-          }
+    if (!isAuthorizedAdmin) return;
 
-          const blkRes = await fetch('/api/admin/blocked-slots', { credentials: 'include' });
-          if (blkRes.ok) {
-            const blkData = await blkRes.json();
-            setBlockedSlots(blkData);
-          }
-        } catch (err) {
-          console.error('Error fetching admin data:', err);
+    const fetchAdminData = async () => {
+      try {
+        const bRes = await fetch('/api/admin/bookings', { credentials: 'include' });
+        if (bRes.ok) {
+          const bData = await bRes.json();
+          setBookings(bData);
         }
-      };
-      fetchAdminData();
-    }
+
+        const blkRes = await fetch('/api/admin/blocked-slots', { credentials: 'include' });
+        if (blkRes.ok) {
+          const blkData = await blkRes.json();
+          setBlockedSlots(blkData);
+        }
+      } catch (err) {
+        console.error('Error fetching admin data:', err);
+      }
+    };
+
+    fetchAdminData();
+    const interval = setInterval(fetchAdminData, 5000);
+    return () => clearInterval(interval);
   }, [isAuthorizedAdmin]);
 
   // Auth Methods
