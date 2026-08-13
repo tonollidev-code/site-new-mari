@@ -194,6 +194,18 @@ export const Header: React.FC = () => {
               </div>
 
               <div className="pt-6 border-t border-[#EADEDA] flex flex-col gap-3">
+                {isAuthorizedAdmin && (
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate('/admin');
+                    }}
+                    className="w-full bg-[#523626] hover:bg-[#3D2314] text-[#E5C158] py-2.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-[#E5C158]/40"
+                  >
+                    <ShieldCheck className="w-4 h-4 text-[#E5C158]" />
+                    <span>Painel Admin</span>
+                  </button>
+                )}
                 <button
                   onClick={() => handleNavClick('booking')}
                   className="w-full bg-[#E5C158] hover:bg-[#C5A059] text-[#3D2314] py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2"

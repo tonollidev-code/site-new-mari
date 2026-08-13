@@ -101,22 +101,13 @@ export const Footer: React.FC = () => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-400 gap-4 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <p>© 2026 Mari Nail Designer. Todos os direitos reservados.</p>
-            {isAuthorizedAdmin ? (
+            {isAuthorizedAdmin && (
               <button
                 onClick={() => navigate('/admin')}
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3D2314] hover:bg-[#2C1810] text-[#E5C158] text-[11px] font-bold uppercase tracking-wider border border-[#E5C158]/40 shadow-sm transition-all"
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-[#E5C158]" />
                 <span>Painel Administrativo</span>
-              </button>
-            ) : (
-              <button
-                onClick={() => navigate('/admin')}
-                className="inline-flex items-center gap-1 text-gray-400 hover:text-[#E5C158] text-[11px] transition-colors"
-                title="Acesso Restrito ao Administrador"
-              >
-                <ShieldCheck className="w-3 h-3 text-gray-500" />
-                <span>Área Restrita (Admin)</span>
               </button>
             )}
           </div>
