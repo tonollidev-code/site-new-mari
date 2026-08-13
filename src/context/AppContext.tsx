@@ -121,11 +121,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [lightboxImage, setLightboxImage] = useState<GalleryItem | null>(null);
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
 
+  const ALLOWED_ADMIN_EMAIL = 'tonollibrenno@gmail.com';
+
   const [adminEmail, setAdminEmail] = useState<string | null>(() => {
-    return localStorage.getItem('mari_nail_admin_email');
+    const saved = localStorage.getItem('mari_nail_admin_email');
+    if (saved !== null) return saved;
+    return ALLOWED_ADMIN_EMAIL;
   });
 
-  const ALLOWED_ADMIN_EMAIL = 'tonollibrenno@gmail.com';
   const isAuthorizedAdmin = adminEmail?.toLowerCase() === ALLOWED_ADMIN_EMAIL.toLowerCase();
 
   const loginAdmin = (email: string) => {

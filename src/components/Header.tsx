@@ -129,6 +129,17 @@ export const Header: React.FC = () => {
               <Calendar className="w-4 h-4" />
               <span>Agendar Horário</span>
             </button>
+
+            {isAuthorizedAdmin && (
+              <button
+                onClick={() => setIsAdminOpen(true)}
+                className="bg-[#6E4936] hover:bg-[#825741] text-[#E5C158] px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider border border-[#E5C158]/30 flex items-center gap-1.5 transition-all shadow-sm"
+                title="Painel Administrativo"
+              >
+                <Settings className="w-3.5 h-3.5" />
+                <span>Painel</span>
+              </button>
+            )}
           </div>
 
           {/* Mobile Hamburger Toggle */}

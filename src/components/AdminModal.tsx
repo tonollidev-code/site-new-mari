@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
-import { X, Calendar, DollarSign, Settings, Tag, Users, BookOpen, Check, Trash2, Edit3, Plus, Sparkles, ShieldCheck, Lock, LogOut, AlertCircle } from 'lucide-react';
+import { X, Calendar, DollarSign, Settings, Check, ShieldCheck, Lock, LogOut, AlertCircle } from 'lucide-react';
 
 const ALLOWED_ADMIN_EMAIL = 'tonollibrenno@gmail.com';
 
@@ -14,14 +14,13 @@ export const AdminModal: React.FC = () => {
     updateServicePrice,
     config,
     updateStudioConfig,
-    blogPosts,
     adminEmail,
     isAuthorizedAdmin,
     loginAdmin,
     logoutAdmin
   } = useApp();
 
-  const [activeTab, setActiveTab] = useState<'bookings' | 'prices' | 'config' | 'blog' | 'loyalty'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'prices' | 'config'>('bookings');
 
   // Authentication State
   const [googleEmailInput, setGoogleEmailInput] = useState('');
@@ -262,30 +261,6 @@ export const AdminModal: React.FC = () => {
                 <Settings className="w-4 h-4 text-[#D4AF37]" />
                 <span>Configurações</span>
               </button>
-
-              <button
-                onClick={() => setActiveTab('loyalty')}
-                className={`py-3.5 px-4 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
-                  activeTab === 'loyalty'
-                    ? 'border-[#D4AF37] text-[#2C1810] bg-white'
-                    : 'border-transparent hover:text-[#2C1810]'
-                }`}
-              >
-                <Users className="w-4 h-4 text-[#D4AF37]" />
-                <span>Fidelidade & Clientes</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('blog')}
-                className={`py-3.5 px-4 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
-                  activeTab === 'blog'
-                    ? 'border-[#D4AF37] text-[#2C1810] bg-white'
-                    : 'border-transparent hover:text-[#2C1810]'
-                }`}
-              >
-                <BookOpen className="w-4 h-4 text-[#D4AF37]" />
-                <span>Blog & Cuidados</span>
-              </button>
             </div>
 
             {/* Tab Content Area */}
@@ -507,54 +482,6 @@ export const AdminModal: React.FC = () => {
                     Salvar Alterações
                   </button>
                 </form>
-              )}
-
-              {/* TAB 4: LOYALTY */}
-              {activeTab === 'loyalty' && (
-                <div className="bg-white p-6 rounded-2xl border border-[#EADEDA]">
-                  <h4 className="font-serif font-bold text-lg text-[#2C1810] mb-2">Programa de Fidelidade VIP</h4>
-                  <p className="text-xs text-gray-500 mb-6">
-                    A cada 5 atendimentos realizados no estúdio, a cliente ganha 1 Banho de Gel ou Spa de Cutículas gratuito!
-                  </p>
-
-                  <div className="space-y-3">
-                    <div className="p-4 rounded-xl bg-[#F8F5F2] border border-[#D4AF37]/30 flex items-center justify-between">
-                      <div>
-                        <p className="font-bold text-sm text-[#2C1810]">Camila Alencar</p>
-                        <p className="text-xs text-gray-500">4 Atendimentos concluídos</p>
-                      </div>
-                      <span className="text-xs font-bold text-[#B8860B] bg-white px-3 py-1 rounded-full border border-[#D4AF37]">
-                        Falta 1 para recompensa!
-                      </span>
-                    </div>
-
-                    <div className="p-4 rounded-xl bg-[#F8F5F2] border border-[#D4AF37]/30 flex items-center justify-between">
-                      <div>
-                        <p className="font-bold text-sm text-[#2C1810]">Beatriz Vasconcelos</p>
-                        <p className="text-xs text-gray-500">5 Atendimentos concluídos</p>
-                      </div>
-                      <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
-                        🎁 Recompensa Liberada!
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* TAB 5: BLOG */}
-              {activeTab === 'blog' && (
-                <div className="bg-white p-6 rounded-2xl border border-[#EADEDA]">
-                  <h4 className="font-serif font-bold text-lg text-[#2C1810] mb-4">Dicas & Artigos de Cuidados</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {blogPosts.map((post) => (
-                      <div key={post.id} className="p-4 rounded-xl border border-[#EADEDA] space-y-2">
-                        <span className="text-[10px] font-bold text-[#B8860B] uppercase">{post.date}</span>
-                        <h5 className="font-serif font-bold text-sm text-[#2C1810]">{post.title}</h5>
-                        <p className="text-xs text-gray-600">{post.snippet}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               )}
 
             </div>
