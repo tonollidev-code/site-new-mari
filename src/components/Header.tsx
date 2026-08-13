@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
-import { Menu, X, Calendar, MapPin, Phone, Instagram, Sparkles, Settings } from 'lucide-react';
+import { Menu, X, Calendar, MapPin, Phone, Instagram, Sparkles, ShieldCheck } from 'lucide-react';
 
 export const Header: React.FC = () => {
-  const { config, scrollToSection, setIsAdminOpen, isAuthorizedAdmin } = useApp();
+  const { config, scrollToSection, isAuthorizedAdmin, navigate } = useApp();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -61,16 +61,6 @@ export const Header: React.FC = () => {
               <Instagram className="w-3.5 h-3.5" />
               <span>{config.instagramHandle}</span>
             </a>
-            {isAuthorizedAdmin && (
-              <button
-                onClick={() => setIsAdminOpen(true)}
-                className="ml-2 px-2 py-0.5 rounded bg-[#6E4936] hover:bg-[#825741] text-[#E5C158] text-[10px] uppercase tracking-wider border border-[#E5C158]/30 flex items-center gap-1 transition-colors"
-                title="Painel Administrativo"
-              >
-                <Settings className="w-3 h-3" />
-                <span>Painel</span>
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -121,6 +111,15 @@ export const Header: React.FC = () => {
 
           {/* CTA Button Desktop */}
           <div className="hidden sm:flex items-center gap-3">
+            {isAuthorizedAdmin && (
+              <button
+                onClick={() => navigate('/admin')}
+                className="bg-[#523626] hover:bg-[#3D2314] text-[#E5C158] border border-[#E5C158]/40 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm flex items-center gap-1.5 transition-all"
+              >
+                <ShieldCheck className="w-4 h-4 text-[#E5C158]" />
+                <span>Painel Admin</span>
+              </button>
+            )}
             <button
               id="header-booking-btn"
               onClick={() => handleNavClick('booking')}
@@ -129,17 +128,6 @@ export const Header: React.FC = () => {
               <Calendar className="w-4 h-4" />
               <span>Agendar Horário</span>
             </button>
-
-            {isAuthorizedAdmin && (
-              <button
-                onClick={() => setIsAdminOpen(true)}
-                className="bg-[#6E4936] hover:bg-[#825741] text-[#E5C158] px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider border border-[#E5C158]/30 flex items-center gap-1.5 transition-all shadow-sm"
-                title="Painel Administrativo"
-              >
-                <Settings className="w-3.5 h-3.5" />
-                <span>Painel</span>
-              </button>
-            )}
           </div>
 
           {/* Mobile Hamburger Toggle */}
@@ -213,19 +201,6 @@ export const Header: React.FC = () => {
                   <Calendar className="w-4 h-4" />
                   <span>Agendar Meu Horário</span>
                 </button>
-
-                {isAuthorizedAdmin && (
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      setIsAdminOpen(true);
-                    }}
-                    className="w-full bg-[#F8F5F2] hover:bg-[#EADEDA] text-[#523626] py-2.5 rounded-full font-bold text-xs uppercase tracking-wider border border-[#E5C158]/30 flex items-center justify-center gap-2"
-                  >
-                    <Settings className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>Painel Administrativo</span>
-                  </button>
-                )}
               </div>
             </div>
           </div>

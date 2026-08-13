@@ -42,11 +42,15 @@ export const BookingSection: React.FC = () => {
     return activeService.price;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!clientName || !clientPhone || !selectedDate || !selectedTime) return;
 
-    const newBooking = addBooking({
+    setErrorMessage(null);
+
+    const res = await addBooking({
       serviceId: activeService.id,
       serviceName: activeService.name,
       servicePrice: calculateFinalPrice(),
@@ -57,8 +61,15 @@ export const BookingSection: React.FC = () => {
       notes
     });
 
-    setCreatedBookingId(newBooking.id);
-    setIsSubmitted(true);
+    if (res.error) {
+      setErrorMessage(res.error);
+      return;
+    }
+
+    if (res.booking) {
+      setCreatedBookingId(res.booking.id);
+      setIsSubmitted(true);
+    }
   };
 
   const formatWhatsAppMessage = () => {
@@ -156,6 +167,12 @@ export const BookingSection: React.FC = () => {
           ) : (
             /* Form Screen */
             <form onSubmit={handleSubmit} className="space-y-6">
+
+              {errorMessage && (
+                <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold animate-in fade-in">
+                  ⚠️ {errorMessage}
+                </div>
+              )}
               
               {/* Step 1: Select Service */}
               <div>

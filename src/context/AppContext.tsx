@@ -1,40 +1,49 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { ServiceItem, GalleryItem, Testimonial, FAQItem, BookingData, StudioConfig, Coupon, BlogPost } from '../types';
+import { ServiceItem, GalleryItem, Testimonial, FAQItem, BookingData, StudioConfig, Coupon, BlogPost, AuthUser, BusinessHours, BlockedSlot } from '../types';
 import { INITIAL_CONFIG, INITIAL_SERVICES, INITIAL_GALLERY, INITIAL_TESTIMONIALS, INITIAL_FAQS, INITIAL_BLOG_POSTS, INITIAL_COUPONS } from '../data/initialData';
 
 interface AppContextType {
+  // Navigation
+  currentPath: string;
+  navigate: (path: string) => void;
+
+  // Data
   config: StudioConfig;
   services: ServiceItem[];
   gallery: GalleryItem[];
   testimonials: Testimonial[];
   faqs: FAQItem[];
   bookings: BookingData[];
+  businessHours: BusinessHours | null;
+  blockedSlots: BlockedSlot[];
   coupons: Coupon[];
   blogPosts: BlogPost[];
-  
-  // Selection / Modal States
+
+  // Selection / Lightbox
   selectedServiceForBooking: ServiceItem | null;
   setSelectedServiceForBooking: (service: ServiceItem | null) => void;
   lightboxImage: GalleryItem | null;
   setLightboxImage: (item: GalleryItem | null) => void;
-  isAdminOpen: boolean;
-  setIsAdminOpen: (open: boolean) => void;
-  
-  // Admin Auth State
-  adminEmail: string | null;
+
+  // Auth
+  currentUser: AuthUser | null;
   isAuthorizedAdmin: boolean;
-  loginAdmin: (email: string) => boolean;
-  logoutAdmin: () => void;
-  
+  authLoading: boolean;
+  loginAdmin: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  logoutAdmin: () => Promise<void>;
+
   // Actions
-  addBooking: (booking: Omit<BookingData, 'id' | 'createdAt' | 'status'>) => BookingData;
-  updateBookingStatus: (id: string, status: 'pending' | 'confirmed' | 'cancelled') => void;
-  updateServicePrice: (id: string, newPrice: string, numericPrice: number) => void;
-  updateStudioConfig: (newConfig: Partial<StudioConfig>) => void;
-  addTestimonial: (testimonial: Omit<Testimonial, 'id' | 'date'>) => void;
-  toggleLikeGalleryItem: (id: string) => void;
-  addCoupon: (coupon: Omit<Coupon, 'id'>) => void;
-  toggleCouponStatus: (id: string) => void;
+  addBooking: (bookingData: Omit<BookingData, 'id' | 'createdAt' | 'status'>) => Promise<{ booking?: BookingData; error?: string }>;
+  updateBookingStatus: (id: string, status: 'pending' | 'confirmed' | 'recused' | 'cancelled' | 'completed') => Promise<void>;
+  addService: (service: Omit<ServiceItem, 'id'>) => Promise<ServiceItem | null>;
+  updateService: (id: string, updates: Partial<ServiceItem>) => Promise<void>;
+  deleteService: (id: string) => Promise<void>;
+  updateBusinessHours: (updates: Partial<BusinessHours>) => Promise<void>;
+  addBlockedSlot: (date: string, timeSlot: string, reason?: string) => Promise<void>;
+  removeBlockedSlot: (id: string) => Promise<void>;
+  updateStudioConfig: (newConfig: Partial<StudioConfig>) => Promise<void>;
+
+  // Public helpers
   getWhatsAppUrl: (customMessage?: string) => string;
   scrollToSection: (sectionId: string) => void;
 }
@@ -42,201 +51,344 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [config, setConfig] = useState<StudioConfig>(() => {
-    const saved = localStorage.getItem('mari_nail_config');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        return {
-          ...INITIAL_CONFIG,
-          ...parsed,
-          address: INITIAL_CONFIG.address,
-          addressShort: INITIAL_CONFIG.addressShort,
-          whatsappNumber: INITIAL_CONFIG.whatsappNumber,
-          whatsappDisplay: INITIAL_CONFIG.whatsappDisplay,
-          instagramHandle: INITIAL_CONFIG.instagramHandle,
-          googleMapsEmbedUrl: INITIAL_CONFIG.googleMapsEmbedUrl,
-        };
-      } catch {
-        return INITIAL_CONFIG;
-      }
-    }
-    return INITIAL_CONFIG;
-  });
+  // Navigation Router state
+  const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname || '/');
 
-  const [services, setServices] = useState<ServiceItem[]>(() => {
-    const saved = localStorage.getItem('mari_nail_services');
-    if (saved) {
-      try {
-        const parsed: ServiceItem[] = JSON.parse(saved);
-        if (parsed.length === INITIAL_SERVICES.length && parsed.every((s, i) => s.id === INITIAL_SERVICES[i].id)) {
-          return parsed.map((service) => {
-            const defaultService = INITIAL_SERVICES.find((s) => s.id === service.id);
-            return defaultService ? { ...service, image: defaultService.image, name: defaultService.name, description: defaultService.description } : service;
-          });
-        }
-      } catch {
-        // fallback to INITIAL_SERVICES
-      }
-    }
-    return INITIAL_SERVICES;
-  });
+  const navigate = (path: string) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-  const [gallery, setGallery] = useState<GalleryItem[]>(() => {
-    const saved = localStorage.getItem('mari_nail_gallery');
-    if (saved) {
-      try {
-        const parsed: GalleryItem[] = JSON.parse(saved);
-        return parsed.map((item) => {
-          const defaultItem = INITIAL_GALLERY.find((g) => g.id === item.id);
-          return defaultItem ? { ...item, imageUrl: defaultItem.imageUrl } : item;
-        });
-      } catch {
-        return INITIAL_GALLERY;
-      }
-    }
-    return INITIAL_GALLERY;
-  });
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname || '/');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(() => {
-    const saved = localStorage.getItem('mari_nail_testimonials');
-    return saved ? JSON.parse(saved) : INITIAL_TESTIMONIALS;
-  });
+  // Auth State
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+  const [authLoading, setAuthLoading] = useState<boolean>(true);
 
+  const isAuthorizedAdmin = currentUser?.role === 'admin';
+
+  // Core Data
+  const [config, setConfig] = useState<StudioConfig>(INITIAL_CONFIG);
+  const [services, setServices] = useState<ServiceItem[]>(INITIAL_SERVICES);
+  const [gallery] = useState<GalleryItem[]>(INITIAL_GALLERY);
+  const [testimonials] = useState<Testimonial[]>(INITIAL_TESTIMONIALS);
   const [faqs] = useState<FAQItem[]>(INITIAL_FAQS);
-
-  const [bookings, setBookings] = useState<BookingData[]>(() => {
-    const saved = localStorage.getItem('mari_nail_bookings');
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  const [coupons, setCoupons] = useState<Coupon[]>(() => {
-    const saved = localStorage.getItem('mari_nail_coupons');
-    return saved ? JSON.parse(saved) : INITIAL_COUPONS;
-  });
-
+  const [bookings, setBookings] = useState<BookingData[]>([]);
+  const [businessHours, setBusinessHours] = useState<BusinessHours | null>(null);
+  const [blockedSlots, setBlockedSlots] = useState<BlockedSlot[]>([]);
+  const [coupons] = useState<Coupon[]>(INITIAL_COUPONS);
   const [blogPosts] = useState<BlogPost[]>(INITIAL_BLOG_POSTS);
 
+  // UI state
   const [selectedServiceForBooking, setSelectedServiceForBooking] = useState<ServiceItem | null>(null);
   const [lightboxImage, setLightboxImage] = useState<GalleryItem | null>(null);
-  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
 
-  const ALLOWED_ADMIN_EMAIL = 'tonollibrenno@gmail.com';
+  // Initial fetch on mount
+  useEffect(() => {
+    const fetchInitial = async () => {
+      try {
+        // Fetch current user auth state
+        const meRes = await fetch('/api/auth/me', { credentials: 'include' });
+        if (meRes.ok) {
+          const meData = await meRes.json();
+          setCurrentUser(meData.user || null);
+        }
 
-  const [adminEmail, setAdminEmail] = useState<string | null>(() => {
-    const saved = localStorage.getItem('mari_nail_admin_email');
-    if (saved !== null) return saved;
-    return ALLOWED_ADMIN_EMAIL;
-  });
+        // Fetch services
+        const srvRes = await fetch('/api/services');
+        if (srvRes.ok) {
+          const srvData = await srvRes.json();
+          if (Array.isArray(srvData) && srvData.length > 0) {
+            setServices(srvData);
+          }
+        }
 
-  const isAuthorizedAdmin = adminEmail?.toLowerCase() === ALLOWED_ADMIN_EMAIL.toLowerCase();
+        // Fetch config
+        const cfgRes = await fetch('/api/config');
+        if (cfgRes.ok) {
+          const cfgData = await cfgRes.json();
+          if (cfgData?.whatsappNumber) {
+            setConfig(cfgData);
+          }
+        }
 
-  const loginAdmin = (email: string) => {
-    const formatted = email.trim().toLowerCase();
-    if (formatted === ALLOWED_ADMIN_EMAIL.toLowerCase()) {
-      setAdminEmail(ALLOWED_ADMIN_EMAIL);
-      localStorage.setItem('mari_nail_admin_email', ALLOWED_ADMIN_EMAIL);
-      return true;
+        // Fetch business hours
+        const bhRes = await fetch('/api/business-hours');
+        if (bhRes.ok) {
+          const bhData = await bhRes.json();
+          setBusinessHours(bhData);
+        }
+      } catch (err) {
+        console.error('Error in fetchInitial:', err);
+      } finally {
+        setAuthLoading(false);
+      }
+    };
+
+    fetchInitial();
+  }, []);
+
+  // Fetch admin data whenever admin logs in
+  useEffect(() => {
+    if (isAuthorizedAdmin) {
+      const fetchAdminData = async () => {
+        try {
+          const bRes = await fetch('/api/admin/bookings', { credentials: 'include' });
+          if (bRes.ok) {
+            const bData = await bRes.json();
+            setBookings(bData);
+          }
+
+          const blkRes = await fetch('/api/admin/blocked-slots', { credentials: 'include' });
+          if (blkRes.ok) {
+            const blkData = await blkRes.json();
+            setBlockedSlots(blkData);
+          }
+        } catch (err) {
+          console.error('Error fetching admin data:', err);
+        }
+      };
+      fetchAdminData();
     }
-    return false;
+  }, [isAuthorizedAdmin]);
+
+  // Auth Methods
+  const loginAdmin = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'Falha no login.' };
+      }
+
+      setCurrentUser(data.user);
+      return { success: true };
+    } catch (err) {
+      return { success: false, error: 'Erro de conexão com o servidor.' };
+    }
   };
 
-  const logoutAdmin = () => {
-    setAdminEmail(null);
-    localStorage.removeItem('mari_nail_admin_email');
+  const logoutAdmin = async (): Promise<void> => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+    } catch {
+      // ignore error
+    } finally {
+      setCurrentUser(null);
+      navigate('/');
+    }
   };
 
-  // Sync state to local storage
-  useEffect(() => {
-    localStorage.setItem('mari_nail_config', JSON.stringify(config));
-  }, [config]);
+  // Booking Actions
+  const addBooking = async (
+    bookingData: Omit<BookingData, 'id' | 'createdAt' | 'status'>
+  ): Promise<{ booking?: BookingData; error?: string }> => {
+    try {
+      const res = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData),
+      });
 
-  useEffect(() => {
-    localStorage.setItem('mari_nail_services', JSON.stringify(services));
-  }, [services]);
+      const data = await res.json();
+      if (!res.ok) {
+        return { error: data.error || 'Erro ao realizar agendamento.' };
+      }
 
-  useEffect(() => {
-    localStorage.setItem('mari_nail_gallery', JSON.stringify(gallery));
-  }, [gallery]);
-
-  useEffect(() => {
-    localStorage.setItem('mari_nail_testimonials', JSON.stringify(testimonials));
-  }, [testimonials]);
-
-  useEffect(() => {
-    localStorage.setItem('mari_nail_bookings', JSON.stringify(bookings));
-  }, [bookings]);
-
-  useEffect(() => {
-    localStorage.setItem('mari_nail_coupons', JSON.stringify(coupons));
-  }, [coupons]);
-
-  const addBooking = (bookingData: Omit<BookingData, 'id' | 'createdAt' | 'status'>): BookingData => {
-    const newBooking: BookingData = {
-      ...bookingData,
-      id: 'BK-' + Math.floor(1000 + Math.random() * 9000),
-      status: 'pending',
-      createdAt: new Date().toLocaleDateString('pt-BR')
-    };
-    setBookings(prev => [newBooking, ...prev]);
-    return newBooking;
+      setBookings((prev) => [data, ...prev]);
+      return { booking: data };
+    } catch (err) {
+      return { error: 'Erro de conexão com o servidor ao agendar.' };
+    }
   };
 
-  const updateBookingStatus = (id: string, status: 'pending' | 'confirmed' | 'cancelled') => {
-    setBookings(prev => prev.map(b => b.id === id ? { ...b, status } : b));
+  const updateBookingStatus = async (
+    id: string,
+    status: 'pending' | 'confirmed' | 'recused' | 'cancelled' | 'completed'
+  ): Promise<void> => {
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}/status`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ status }),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        setBookings((prev) => prev.map((b) => (b.id === id ? updated : b)));
+      }
+    } catch (err) {
+      console.error('Error updating booking status:', err);
+    }
   };
 
-  const updateServicePrice = (id: string, newPrice: string, numericPrice: number) => {
-    setServices(prev => prev.map(s => s.id === id ? { ...s, price: newPrice, numericPrice } : s));
+  // Services Actions
+  const addService = async (serviceData: Omit<ServiceItem, 'id'>): Promise<ServiceItem | null> => {
+    try {
+      const res = await fetch('/api/admin/services', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(serviceData),
+      });
+
+      if (res.ok) {
+        const newService = await res.json();
+        setServices((prev) => [...prev, newService]);
+        return newService;
+      }
+    } catch (err) {
+      console.error('Error adding service:', err);
+    }
+    return null;
   };
 
-  const updateStudioConfig = (newConfig: Partial<StudioConfig>) => {
-    setConfig(prev => ({ ...prev, ...newConfig }));
+  const updateService = async (id: string, updates: Partial<ServiceItem>): Promise<void> => {
+    try {
+      const res = await fetch(`/api/admin/services/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(updates),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        setServices((prev) => prev.map((s) => (s.id === id ? updated : s)));
+      }
+    } catch (err) {
+      console.error('Error updating service:', err);
+    }
   };
 
-  const addTestimonial = (testimonialData: Omit<Testimonial, 'id' | 'date'>) => {
-    const newTestimonial: Testimonial = {
-      ...testimonialData,
-      id: 'test-' + Date.now(),
-      date: 'Recente'
-    };
-    setTestimonials(prev => [newTestimonial, ...prev]);
+  const deleteService = async (id: string): Promise<void> => {
+    try {
+      const res = await fetch(`/api/admin/services/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      if (res.ok) {
+        setServices((prev) => prev.filter((s) => s.id !== id));
+      }
+    } catch (err) {
+      console.error('Error deleting service:', err);
+    }
   };
 
-  const toggleLikeGalleryItem = (id: string) => {
-    setGallery(prev => prev.map(g => g.id === id ? { ...g, likes: g.likes + 1 } : g));
+  // Hours & Slot Blocker Actions
+  const updateBusinessHours = async (updates: Partial<BusinessHours>): Promise<void> => {
+    try {
+      const res = await fetch('/api/admin/business-hours', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(updates),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        setBusinessHours(updated);
+      }
+    } catch (err) {
+      console.error('Error updating business hours:', err);
+    }
   };
 
-  const addCoupon = (couponData: Omit<Coupon, 'id'>) => {
-    const newCoupon: Coupon = {
-      ...couponData,
-      id: 'cup-' + Date.now()
-    };
-    setCoupons(prev => [...prev, newCoupon]);
+  const addBlockedSlot = async (date: string, timeSlot: string, reason?: string): Promise<void> => {
+    try {
+      const res = await fetch('/api/admin/blocked-slots', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ date, timeSlot, reason }),
+      });
+
+      if (res.ok) {
+        const newBlock = await res.json();
+        setBlockedSlots((prev) => [...prev, newBlock]);
+      }
+    } catch (err) {
+      console.error('Error adding blocked slot:', err);
+    }
   };
 
-  const toggleCouponStatus = (id: string) => {
-    setCoupons(prev => prev.map(c => c.id === id ? { ...c, active: !c.active } : c));
+  const removeBlockedSlot = async (id: string): Promise<void> => {
+    try {
+      const res = await fetch(`/api/admin/blocked-slots/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      if (res.ok) {
+        setBlockedSlots((prev) => prev.filter((b) => b.id !== id));
+      }
+    } catch (err) {
+      console.error('Error removing blocked slot:', err);
+    }
   };
 
+  // Config Actions
+  const updateStudioConfig = async (newConfig: Partial<StudioConfig>): Promise<void> => {
+    try {
+      const res = await fetch('/api/admin/config', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(newConfig),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        setConfig(updated);
+      }
+    } catch (err) {
+      console.error('Error updating config:', err);
+    }
+  };
+
+  // Helpers
   const getWhatsAppUrl = (customMessage?: string) => {
     const defaultMsg = 'Olá, Mari! Vim pelo seu site e gostaria de agendar um horário. 💅✨';
     const text = encodeURIComponent(customMessage || defaultMsg);
-    // Sanitize number digits
     const cleanNumber = config.whatsappNumber.replace(/\D/g, '');
     return `https://wa.me/${cleanNumber}?text=${text}`;
   };
 
   const scrollToSection = (sectionId: string) => {
+    if (currentPath !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
       const headerOffset = 90;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
@@ -244,34 +396,38 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   return (
     <AppContext.Provider
       value={{
+        currentPath,
+        navigate,
         config,
         services,
         gallery,
         testimonials,
         faqs,
         bookings,
+        businessHours,
+        blockedSlots,
         coupons,
         blogPosts,
         selectedServiceForBooking,
         setSelectedServiceForBooking,
         lightboxImage,
         setLightboxImage,
-        isAdminOpen,
-        setIsAdminOpen,
-        adminEmail,
+        currentUser,
         isAuthorizedAdmin,
+        authLoading,
         loginAdmin,
         logoutAdmin,
         addBooking,
         updateBookingStatus,
-        updateServicePrice,
+        addService,
+        updateService,
+        deleteService,
+        updateBusinessHours,
+        addBlockedSlot,
+        removeBlockedSlot,
         updateStudioConfig,
-        addTestimonial,
-        toggleLikeGalleryItem,
-        addCoupon,
-        toggleCouponStatus,
         getWhatsAppUrl,
-        scrollToSection
+        scrollToSection,
       }}
     >
       {children}

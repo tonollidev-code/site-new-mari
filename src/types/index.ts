@@ -39,6 +39,13 @@ export interface FAQItem {
   category?: string;
 }
 
+export interface AuthUser {
+  id: string;
+  email: string;
+  role: 'admin' | 'client';
+  name: string;
+}
+
 export interface BookingData {
   id: string;
   serviceId: string;
@@ -49,8 +56,23 @@ export interface BookingData {
   clientName: string;
   clientPhone: string;
   notes?: string;
-  status: 'pending' | 'confirmed' | 'cancelled';
+  status: 'pending' | 'confirmed' | 'recused' | 'cancelled' | 'completed';
   createdAt: string;
+}
+
+export interface BusinessHours {
+  workingDays: string[];
+  openTime: string;
+  closeTime: string;
+  slotInterval: number;
+  availableSlots: string[];
+}
+
+export interface BlockedSlot {
+  id: string;
+  date: string;
+  timeSlot: string;
+  reason?: string;
 }
 
 export interface StudioConfig {
