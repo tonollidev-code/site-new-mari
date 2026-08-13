@@ -214,9 +214,19 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: any = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        return {
+          success: false,
+          error: `Resposta inválida do servidor (Status ${res.status}).`,
+        };
+      }
+
       if (!res.ok) {
-        return { success: false, error: data.error || 'Falha no login.' };
+        return { success: false, error: data.error || 'E-mail ou senha incorretos.' };
       }
 
       if (data.token) {
@@ -229,6 +239,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
       return { success: true };
     } catch (err) {
+      console.error('Error in loginAdmin:', err);
       return { success: false, error: 'Erro de conexão com o servidor.' };
     }
   };

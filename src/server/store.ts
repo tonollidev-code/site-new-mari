@@ -54,15 +54,13 @@ const DEFAULT_BUSINESS_HOURS: BusinessHours = {
 };
 
 function initDb(): DatabaseSchema {
-  const dir = path.dirname(DB_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
+  const adminEmail = (process.env.ADMIN_EMAIL || 'tonollibrenno@gmail.com').toLowerCase();
+  const adminPass = process.env.ADMIN_PASSWORD || 'admin123';
 
   const adminUser: User = {
     id: 'user-admin-1',
-    email: DEFAULT_ADMIN_EMAIL.toLowerCase(),
-    passwordHash: hashPassword(DEFAULT_ADMIN_PASSWORD),
+    email: adminEmail,
+    passwordHash: hashPassword(adminPass),
     role: 'admin',
     name: 'Mari Nail Admin',
   };
@@ -76,26 +74,30 @@ function initDb(): DatabaseSchema {
     config: INITIAL_CONFIG,
   };
 
-  if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2), 'utf-8');
-    return initialData;
-  }
-
   try {
+    const dir = path.dirname(DB_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    if (!fs.existsSync(DB_FILE)) {
+      fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2), 'utf-8');
+      return initialData;
+    }
+
     const raw = fs.readFileSync(DB_FILE, 'utf-8');
     const parsed = JSON.parse(raw);
 
-    // Ensure admin user exists with current credentials
-    let users = parsed.users || [];
+    let users: User[] = parsed.users || [];
     const existingAdminIdx = users.findIndex(
-      (u: User) => u.email.toLowerCase() === DEFAULT_ADMIN_EMAIL.toLowerCase()
+      (u: User) => u.email.toLowerCase() === adminEmail || u.email.toLowerCase() === 'tonollibrenno@gmail.com'
     );
 
     if (existingAdminIdx >= 0) {
       users[existingAdminIdx] = {
         ...users[existingAdminIdx],
         role: 'admin',
-        passwordHash: hashPassword(DEFAULT_ADMIN_PASSWORD),
+        passwordHash: hashPassword(adminPass),
       };
     } else {
       users.push(adminUser);
@@ -110,11 +112,15 @@ function initDb(): DatabaseSchema {
       config: parsed.config || INITIAL_CONFIG,
     };
 
-    fs.writeFileSync(DB_FILE, JSON.stringify(merged, null, 2), 'utf-8');
+    try {
+      fs.writeFileSync(DB_FILE, JSON.stringify(merged, null, 2), 'utf-8');
+    } catch {
+      // Ignore write error on read-only environments
+    }
+
     return merged;
   } catch (err) {
-    console.error('Failed to read db.json, re-initializing store:', err);
-    fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2), 'utf-8');
+    console.warn('File system read/write skipped or unavailable, using in-memory store:', err);
     return initialData;
   }
 }
@@ -128,24 +134,38 @@ class Store {
 
   private save() {
     try {
+      const dir = path.dirname(DB_FILE);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
       fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
     } catch (err) {
-      console.error('Failed to save db.json:', err);
+      // Fallback ignore on read-only environments
     }
   }
 
   // Users
   getUserByEmail(email: string): User | undefined {
     const cleanEmail = (email || '').trim().toLowerCase();
-    const user = this.data.users.find((u) => u.email.toLowerCase() === cleanEmail);
-    if (user) {
-      if (
-        cleanEmail === 'tonollibrenno@gmail.com' ||
-        (process.env.ADMIN_EMAIL && cleanEmail === process.env.ADMIN_EMAIL.toLowerCase())
-      ) {
+    let user = this.data.users.find((u) => u.email.toLowerCase() === cleanEmail);
+    
+    const adminEmail = (process.env.ADMIN_EMAIL || 'tonollibrenno@gmail.com').toLowerCase();
+    
+    if (cleanEmail === 'tonollibrenno@gmail.com' || cleanEmail === adminEmail) {
+      if (!user) {
+        user = {
+          id: 'user-admin-1',
+          email: cleanEmail,
+          passwordHash: hashPassword(process.env.ADMIN_PASSWORD || 'admin123'),
+          role: 'admin',
+          name: 'Mari Nail Admin',
+        };
+        this.data.users.push(user);
+      } else {
         user.role = 'admin';
       }
     }
+
     return user;
   }
 
