@@ -85,6 +85,8 @@ export const Hero: React.FC = () => {
                     src="https://i.postimg.cc/wTrHCqHZ/Whats-App-Image-2026-08-13-at-09-55-45.jpg"
                     referrerPolicy="no-referrer"
                     alt="Unhas em gel com durabilidade feitas por Mariana Leone"
+                    loading="eager"
+                    decoding="async"
                     className="w-full h-[390px] sm:h-[470px] object-cover transition-transform duration-700 ease-out hover:scale-103"
                   />
 

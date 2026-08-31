@@ -44,6 +44,7 @@ export const Gallery: React.FC = () => {
                   alt="Trabalho de Nail Art"
                   className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700 ease-out"
                   loading="lazy"
+                  decoding="async"
                 />
 
                 {/* Refined Subtle Hover Zoom Overlay */}

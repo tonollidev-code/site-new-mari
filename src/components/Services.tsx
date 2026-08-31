@@ -76,6 +76,8 @@ export const Services: React.FC = () => {
                     <img
                       src={service.image}
                       alt={service.name}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700 ease-out"
                     />
                     <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-xs p-2 rounded-xl border border-[#DFD7CD] shadow-xs">

@@ -30,6 +30,8 @@ export const About: React.FC = () => {
                     src="https://i.postimg.cc/sx0cCTDJ/Whats-App-Image-2026-08-08-at-16-40-36.jpg"
                     referrerPolicy="no-referrer"
                     alt="Mariana Leone - Especialista em unhas sofisticadas"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-[430px] sm:h-[480px] object-cover transition-transform duration-700 ease-out hover:scale-103"
                   />
                 </div>

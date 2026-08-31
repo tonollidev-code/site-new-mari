@@ -458,19 +458,27 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          const headerOffset = 80;
+          const currentY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + currentY - headerOffset;
+          window.scrollTo({
+            top: Math.max(0, offsetPosition),
+            behavior: 'smooth',
+          });
         }
-      }, 100);
+      }, 120);
       return;
     }
 
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = 90;
+      const headerOffset = 80;
+      const currentY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const offsetPosition = elementPosition + currentY - headerOffset;
       window.scrollTo({
-        top: offsetPosition,
+        top: Math.max(0, offsetPosition),
         behavior: 'smooth',
       });
     }

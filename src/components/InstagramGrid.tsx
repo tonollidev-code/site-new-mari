@@ -80,6 +80,7 @@ export const InstagramGrid: React.FC = () => {
                 alt={post.title}
                 className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
                 loading="lazy"
+                decoding="async"
               />
 
               {/* Clean Luxury Hover Overlay */}
