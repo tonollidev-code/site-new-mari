@@ -157,71 +157,71 @@ export const Header: React.FC = () => {
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Slide-Over Drawer (Only on Mobile) */}
-        {mobileMenuOpen && (
+      {/* Mobile Slide-Over Drawer (Rendered outside header to avoid backdrop-filter stacking trapping) */}
+      {mobileMenuOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-[100] bg-[#22120B]/60 backdrop-blur-xs flex justify-end animate-in fade-in duration-200"
+          onClick={() => setMobileMenuOpen(false)}
+        >
           <div 
-            className="md:hidden fixed inset-0 z-50 bg-[#22120B]/60 backdrop-blur-xs flex justify-end animate-in fade-in duration-200"
-            onClick={() => setMobileMenuOpen(false)}
+            className="w-[85%] max-w-sm bg-white h-full shadow-2xl flex flex-col justify-between p-6 overflow-y-auto animate-in slide-in-from-right duration-300 border-l border-[#E5C158]/30"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div 
-              className="w-[85%] max-w-sm bg-white h-full shadow-2xl flex flex-col justify-between p-6 overflow-y-auto animate-in slide-in-from-right duration-300 border-l border-[#E5C158]/30"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div>
-                <div className="flex items-center justify-between pb-5 border-b border-[#EADEDA]">
-                  <div className="flex items-center gap-2.5">
-                    <img
-                      src="https://i.postimg.cc/y6wg2q7F/Whats-App-Image-2026-08-08-at-21-38-19.jpg"
-                      referrerPolicy="no-referrer"
-                      alt="Mariana Leone Logo"
-                      className="w-10 h-10 rounded-full object-cover border border-[#E5C158] shadow-2xs"
-                    />
-                    <div className="flex flex-col">
-                      <span className="font-serif font-bold text-base text-[#523626] leading-tight">
-                        Mariana <span className="text-[#C5A059]">Leone</span>
-                      </span>
-                      <span className="text-[9px] tracking-[0.25em] text-[#A38675] uppercase font-sans font-medium">
-                        Nail Designer
-                      </span>
-                    </div>
+            <div>
+              <div className="flex items-center justify-between pb-5 border-b border-[#EADEDA]">
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src="https://i.postimg.cc/y6wg2q7F/Whats-App-Image-2026-08-08-at-21-38-19.jpg"
+                    referrerPolicy="no-referrer"
+                    alt="Mariana Leone Logo"
+                    className="w-10 h-10 rounded-full object-cover border border-[#E5C158] shadow-2xs"
+                  />
+                  <div className="flex flex-col">
+                    <span className="font-serif font-bold text-base text-[#523626] leading-tight">
+                      Mariana <span className="text-[#C5A059]">Leone</span>
+                    </span>
+                    <span className="text-[9px] tracking-[0.25em] text-[#A38675] uppercase font-sans font-medium">
+                      Nail Designer
+                    </span>
                   </div>
-                  <button
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-10 h-10 rounded-full bg-[#FAF6F0] hover:bg-gray-100 flex items-center justify-center text-[#3D2314] cursor-pointer transition-colors border border-[#EADEDA]"
-                    aria-label="Fechar Menu"
-                  >
-                    <X className="w-5 h-5 text-[#3D2314]" />
-                  </button>
                 </div>
-
-                <div className="py-6 flex flex-col gap-2">
-                  {navItems.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => handleNavClick(item.id)}
-                      className="text-left py-3.5 px-4 rounded-2xl hover:bg-[#F8F5F2] active:bg-[#EADEDA] text-xs font-bold uppercase tracking-wider text-[#523626] flex items-center justify-between hover:text-[#C5A059] transition-all cursor-pointer border border-transparent hover:border-[#E5C158]/20"
-                    >
-                      <span>{item.label}</span>
-                      <Sparkles className="w-3.5 h-3.5 text-[#E5C158]" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-6 border-t border-[#EADEDA] flex flex-col gap-3">
                 <button
-                  onClick={() => handleNavClick('booking')}
-                  className="w-full bg-gradient-to-r from-[#E5C158] via-[#FFD700] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] py-3.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98 transition-transform"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-10 h-10 rounded-full bg-[#FAF6F0] hover:bg-gray-100 flex items-center justify-center text-[#3D2314] cursor-pointer transition-colors border border-[#EADEDA]"
+                  aria-label="Fechar Menu"
                 >
-                  <Calendar className="w-4 h-4" />
-                  <span>Agendar Meu Horário</span>
+                  <X className="w-5 h-5 text-[#3D2314]" />
                 </button>
               </div>
+
+              <div className="py-6 flex flex-col gap-2">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className="text-left py-3.5 px-4 rounded-2xl hover:bg-[#F8F5F2] active:bg-[#EADEDA] text-xs font-bold uppercase tracking-wider text-[#523626] flex items-center justify-between hover:text-[#C5A059] transition-all cursor-pointer border border-transparent hover:border-[#E5C158]/20"
+                  >
+                    <span>{item.label}</span>
+                    <Sparkles className="w-3.5 h-3.5 text-[#E5C158]" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-[#EADEDA] flex flex-col gap-3">
+              <button
+                onClick={() => handleNavClick('booking')}
+                className="w-full bg-gradient-to-r from-[#E5C158] via-[#FFD700] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] py-3.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98 transition-transform"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Agendar Meu Horário</span>
+              </button>
             </div>
           </div>
-        )}
-      </header>
+        </div>
+      )}
     </>
   );
 };

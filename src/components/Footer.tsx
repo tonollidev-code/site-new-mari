@@ -98,29 +98,20 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Copyright Line */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-400 gap-4 text-center sm:text-left">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#A38675] gap-4 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <p>© 2026 Mariana Leone. Todos os direitos reservados.</p>
-            {isAuthorizedAdmin ? (
-              <button
-                onClick={() => navigate('/admin')}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3D2314] hover:bg-[#2C1810] text-[#E5C158] text-[11px] font-bold uppercase tracking-wider border border-[#E5C158]/40 shadow-xs transition-all cursor-pointer"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#E5C158]" />
-                <span>Painel Administrativo</span>
-              </button>
-            ) : (
-              <button
-                onClick={() => navigate('/admin')}
-                className="inline-flex items-center gap-1 text-gray-400 hover:text-[#E5C158] text-[11px] transition-colors cursor-pointer"
-                title="Acesso Restrito ao Administrador"
-              >
-                <ShieldCheck className="w-3 h-3 text-gray-500" />
-                <span>Área Restrita (Admin)</span>
-              </button>
-            )}
+            <span className="hidden sm:inline text-[#6E4936]">•</span>
+            <button
+              onClick={() => navigate('/admin')}
+              className="inline-flex items-center gap-1.5 text-[#A38675] hover:text-[#FFC800] text-[10px] sm:text-[11px] transition-colors cursor-pointer opacity-70 hover:opacity-100"
+              title="Área Administrativa"
+            >
+              <ShieldCheck className="w-3 h-3 text-[#A38675] hover:text-[#FFC800]" />
+              <span>Painel Administrativo</span>
+            </button>
           </div>
-          <p className="flex items-center gap-1">
+          <p className="flex items-center gap-1 text-[#A38675]">
             Feito com <Heart className="w-3.5 h-3.5 text-rose-500 fill-current" /> para realçar sua beleza.
           </p>
         </div>
