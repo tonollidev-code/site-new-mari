@@ -13,7 +13,8 @@ const PORT = 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'mari_nail_designer_jwt_secret_2026';
 
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
 
 // User payload interface

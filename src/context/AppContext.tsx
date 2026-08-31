@@ -105,7 +105,18 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   // Core Data
   const [config, setConfig] = useState<StudioConfig>(INITIAL_CONFIG);
-  const [services, setServices] = useState<ServiceItem[]>(INITIAL_SERVICES);
+  const [services, setServices] = useState<ServiceItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('mari_nail_services');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch {}
+    return INITIAL_SERVICES;
+  });
   const [gallery] = useState<GalleryItem[]>(INITIAL_GALLERY);
   const [testimonials] = useState<Testimonial[]>(INITIAL_TESTIMONIALS);
   const [faqs] = useState<FAQItem[]>(INITIAL_FAQS);
@@ -319,6 +330,18 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   // Services Actions
   const addService = async (serviceData: Omit<ServiceItem, 'id'>): Promise<ServiceItem | null> => {
+    const tempId = 'srv-' + Date.now();
+    const newServiceObj: ServiceItem = { ...serviceData, id: tempId };
+
+    // Update state immediately
+    setServices((prev) => {
+      const next = [...prev, newServiceObj];
+      try {
+        localStorage.setItem('mari_nail_services', JSON.stringify(next));
+      } catch {}
+      return next;
+    });
+
     try {
       const res = await fetch('/api/admin/services', {
         method: 'POST',
@@ -328,17 +351,32 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       });
 
       if (res.ok) {
-        const newService = await res.json();
-        setServices((prev) => [...prev, newService]);
-        return newService;
+        const savedService = await res.json();
+        setServices((prev) => {
+          const next = prev.map((s) => (s.id === tempId ? savedService : s));
+          try {
+            localStorage.setItem('mari_nail_services', JSON.stringify(next));
+          } catch {}
+          return next;
+        });
+        return savedService;
       }
     } catch (err) {
-      console.error('Error adding service:', err);
+      console.error('Error adding service on backend:', err);
     }
-    return null;
+    return newServiceObj;
   };
 
   const updateService = async (id: string, updates: Partial<ServiceItem>): Promise<void> => {
+    // Optimistic & instant local update
+    setServices((prev) => {
+      const next = prev.map((s) => (s.id === id ? { ...s, ...updates } : s));
+      try {
+        localStorage.setItem('mari_nail_services', JSON.stringify(next));
+      } catch {}
+      return next;
+    });
+
     try {
       const res = await fetch(`/api/admin/services/${id}`, {
         method: 'PUT',
@@ -349,26 +387,37 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
       if (res.ok) {
         const updated = await res.json();
-        setServices((prev) => prev.map((s) => (s.id === id ? updated : s)));
+        setServices((prev) => {
+          const next = prev.map((s) => (s.id === id ? updated : s));
+          try {
+            localStorage.setItem('mari_nail_services', JSON.stringify(next));
+          } catch {}
+          return next;
+        });
       }
     } catch (err) {
-      console.error('Error updating service:', err);
+      console.error('Error updating service on server:', err);
     }
   };
 
   const deleteService = async (id: string): Promise<void> => {
+    // Instant local removal
+    setServices((prev) => {
+      const next = prev.filter((s) => s.id !== id);
+      try {
+        localStorage.setItem('mari_nail_services', JSON.stringify(next));
+      } catch {}
+      return next;
+    });
+
     try {
-      const res = await fetch(`/api/admin/services/${id}`, {
+      await fetch(`/api/admin/services/${id}`, {
         method: 'DELETE',
         headers: getAuthHeaders(),
         credentials: 'include',
       });
-
-      if (res.ok) {
-        setServices((prev) => prev.filter((s) => s.id !== id));
-      }
     } catch (err) {
-      console.error('Error deleting service:', err);
+      console.error('Error deleting service on server:', err);
     }
   };
 
