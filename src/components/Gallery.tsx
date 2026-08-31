@@ -7,7 +7,7 @@ export const Gallery: React.FC = () => {
   const { gallery, setLightboxImage, scrollToSection } = useApp();
 
   return (
-    <section id="gallery" className="py-20 lg:py-24 bg-[#F8F5F2] border-b border-[#EADEDA] relative">
+    <section id="gallery" className="py-20 lg:py-24 bg-[#F8F5F2]/80 backdrop-blur-[2px] border-b border-[#EADEDA] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

@@ -20,6 +20,7 @@ import { CTASection } from './components/CTASection';
 import { Footer } from './components/Footer';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 import { GalleryLightbox } from './components/GalleryLightbox';
+import { GlassLogoBackground } from './components/GlassLogoBackground';
 import { AdminLoginPage } from './components/admin/AdminLoginPage';
 import { AdminDashboardPage } from './components/admin/AdminDashboardPage';
 import { Sparkles } from 'lucide-react';
@@ -56,12 +57,15 @@ function MainContent() {
 
   // Public Website View
   return (
-    <div className="min-h-screen bg-[#FCFAF7] text-[#593E30] font-sans flex flex-col selection:bg-[#FFD700]/30 selection:text-[#B37E00]">
+    <div className="relative min-h-screen bg-[#FCFAF7] text-[#593E30] font-sans flex flex-col selection:bg-[#FFD700]/30 selection:text-[#B37E00]">
+      {/* Glassmorphic Animated Golden Logo Background */}
+      <GlassLogoBackground />
+
       {/* Fixed Navigation Header */}
       <Header />
 
       {/* Main Content Sections */}
-      <main className="flex-1">
+      <main className="relative z-10 flex-1">
         <Hero />
         <Highlights />
         <About />
@@ -76,7 +80,9 @@ function MainContent() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
 
       {/* Floating Widgets & Lightbox */}
       <WhatsAppFloatingButton />

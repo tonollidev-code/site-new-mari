@@ -12,7 +12,7 @@ export const FAQSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-20 lg:py-24 bg-[#F8F5F2] border-b border-[#EADEDA] relative">
+    <section id="faq" className="py-20 lg:py-24 bg-[#F8F5F2]/80 backdrop-blur-[2px] border-b border-[#EADEDA] relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

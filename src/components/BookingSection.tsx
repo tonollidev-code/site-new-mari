@@ -128,7 +128,7 @@ export const BookingSection: React.FC = () => {
   };
 
   return (
-    <section id="booking" className="py-20 lg:py-24 bg-[#FCFAF7] border-b border-[#EADEDA]/60 relative">
+    <section id="booking" className="py-20 lg:py-24 bg-transparent border-b border-[#EADEDA]/60 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Title */}

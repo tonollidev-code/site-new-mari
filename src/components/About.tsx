@@ -7,7 +7,7 @@ export const About: React.FC = () => {
   const { scrollToSection } = useApp();
 
   return (
-    <section id="about" className="py-20 lg:py-24 bg-[#F8F5F2] relative overflow-hidden border-b border-[#EADEDA]">
+    <section id="about" className="py-20 lg:py-24 bg-[#F8F5F2]/80 backdrop-blur-[2px] relative overflow-hidden border-b border-[#EADEDA]">
       {/* Subtle organic warmth */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-[#E5C158]/10 rounded-full blur-[100px] pointer-events-none" />
 

@@ -30,7 +30,7 @@ export const BeforeAfter: React.FC = () => {
   }, [isDragging, handleMove]);
 
   return (
-    <section className="py-20 lg:py-24 bg-[#FCFAF7] border-b border-[#EADEDA]/60 relative overflow-hidden">
+    <section className="py-20 lg:py-24 bg-transparent border-b border-[#EADEDA]/60 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

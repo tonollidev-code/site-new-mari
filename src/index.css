@@ -67,4 +67,13 @@
   background: #C5A059;
 }
 
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+  50%, 100% {
+    transform: translateX(200%) rotate(25deg);
+  }
+}
+
 

@@ -7,7 +7,7 @@ export const Hero: React.FC = () => {
   const { scrollToSection } = useApp();
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-[#FCFAF7] pt-10 pb-16 lg:py-24 border-b border-[#EADEDA]/60">
+    <section id="hero" className="relative overflow-hidden bg-transparent pt-10 pb-16 lg:py-24 border-b border-[#EADEDA]/60">
       {/* Subtle organic light accent */}
       <div 
         className="absolute top-0 right-1/4 w-96 h-96 bg-[#F5E5C9]/30 rounded-full blur-[100px] pointer-events-none -z-0" 

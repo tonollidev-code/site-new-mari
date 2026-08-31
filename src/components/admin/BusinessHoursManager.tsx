@@ -45,9 +45,9 @@ export const BusinessHoursManager: React.FC = () => {
     <div className="space-y-8">
       
       {/* Schedule Settings */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#E5C158]/40 shadow-sm">
+      <div className="bg-white/90 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-[#E5C158]/40 shadow-[0_10px_25px_rgba(44,24,16,0.04)]">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-2xl bg-[#F8F5F2] border border-[#E5C158]/40 flex items-center justify-center text-[#C5A059]">
+          <div className="w-10 h-10 rounded-2xl bg-[#F8F5F2] border border-[#E5C158]/40 flex items-center justify-center text-[#C5A059] shadow-xs">
             <Clock className="w-5 h-5" />
           </div>
           <div>
@@ -75,7 +75,7 @@ export const BusinessHoursManager: React.FC = () => {
               required
               value={openTime}
               onChange={(e) => setOpenTime(e.target.value)}
-              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626]"
+              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
             />
           </div>
 
@@ -88,7 +88,7 @@ export const BusinessHoursManager: React.FC = () => {
               required
               value={closeTime}
               onChange={(e) => setCloseTime(e.target.value)}
-              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626]"
+              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
             />
           </div>
 
@@ -102,14 +102,14 @@ export const BusinessHoursManager: React.FC = () => {
               required
               value={slotInterval}
               onChange={(e) => setSlotInterval(Number(e.target.value))}
-              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626]"
+              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
             />
           </div>
 
           <div className="sm:col-span-3 pt-2 flex justify-end">
             <button
               type="submit"
-              className="bg-[#523626] hover:bg-[#3D2314] text-[#F5E5C9] px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider shadow-md transition-all"
+              className="bg-[#523626] hover:bg-[#3D2314] text-[#F5E5C9] px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider shadow-md border border-[#E5C158]/40 transition-all cursor-pointer"
             >
               Salvar Alterações de Horário
             </button>
@@ -118,9 +118,9 @@ export const BusinessHoursManager: React.FC = () => {
       </div>
 
       {/* Slot Blocker Section */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#E5C158]/40 shadow-sm">
+      <div className="bg-white/90 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-[#E5C158]/40 shadow-[0_10px_25px_rgba(44,24,16,0.04)]">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600">
+          <div className="w-10 h-10 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 shadow-xs">
             <Lock className="w-5 h-5" />
           </div>
           <div>
@@ -132,7 +132,7 @@ export const BusinessHoursManager: React.FC = () => {
         </div>
 
         {/* Add Block Form */}
-        <form onSubmit={handleAddBlock} className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs mb-8 bg-[#F8F5F2] p-4 rounded-2xl border border-[#EADEDA]">
+        <form onSubmit={handleAddBlock} className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs mb-8 bg-[#F8F5F2]/90 p-4 rounded-2xl border border-[#EADEDA]">
           <div>
             <label className="block font-bold uppercase tracking-wider text-[#523626] mb-1">
               Data do Bloqueio *
@@ -180,7 +180,7 @@ export const BusinessHoursManager: React.FC = () => {
           <div className="flex items-end">
             <button
               type="submit"
-              className="w-full bg-rose-600 hover:bg-rose-700 text-white p-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5"
+              className="w-full bg-rose-600 hover:bg-rose-700 text-white p-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <Lock className="w-3.5 h-3.5" />
               <span>Bloquear Slot</span>
@@ -203,7 +203,7 @@ export const BusinessHoursManager: React.FC = () => {
               {blockedSlots.map((b) => (
                 <div
                   key={b.id}
-                  className="p-3.5 rounded-2xl bg-white border border-rose-200 shadow-sm flex items-center justify-between text-xs"
+                  className="p-3.5 rounded-2xl bg-white/95 border border-rose-200 shadow-sm flex items-center justify-between text-xs"
                 >
                   <div>
                     <div className="flex items-center gap-2 text-[#523626]">
@@ -217,7 +217,7 @@ export const BusinessHoursManager: React.FC = () => {
                   </div>
                   <button
                     onClick={() => removeBlockedSlot(b.id)}
-                    className="p-1.5 hover:bg-rose-50 text-rose-600 rounded-lg transition-colors"
+                    className="p-1.5 hover:bg-rose-50 text-rose-600 rounded-lg transition-colors cursor-pointer"
                     title="Desbloquear horário"
                   >
                     <Trash2 className="w-4 h-4" />

@@ -88,7 +88,7 @@ export const ServicesManager: React.FC = () => {
     <div className="space-y-6">
       
       {/* Header action */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-3xl border border-[#E5C158]/40 shadow-sm">
+      <div className="flex items-center justify-between bg-white/90 backdrop-blur-md p-5 rounded-3xl border border-[#E5C158]/40 shadow-[0_10px_25px_rgba(44,24,16,0.04)]">
         <div>
           <h3 className="font-serif font-bold text-lg text-[#523626]">Gerenciamento de Serviços</h3>
           <p className="text-xs text-[#8C6E5D]">
@@ -97,7 +97,7 @@ export const ServicesManager: React.FC = () => {
         </div>
         <button
           onClick={openAddModal}
-          className="bg-gradient-to-r from-[#E5C158] via-[#F5E5C9] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-md flex items-center gap-2 transition-transform transform hover:-translate-y-0.5"
+          className="bg-gradient-to-r from-[#E5C158] via-[#FFD700] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-md shadow-[#E5C158]/20 flex items-center gap-2 transition-transform transform hover:-translate-y-0.5 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>Novo Serviço</span>
@@ -109,7 +109,7 @@ export const ServicesManager: React.FC = () => {
         {services.map((service) => (
           <div
             key={service.id}
-            className="bg-white rounded-3xl border border-[#E5C158]/30 shadow-md overflow-hidden flex flex-col justify-between hover:shadow-lg transition-shadow"
+            className="bg-white/95 backdrop-blur-md rounded-3xl border border-[#E5C158]/35 shadow-md overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-[#E5C158]/60 transition-all"
           >
             <div>
               {/* Image Banner */}
@@ -118,16 +118,16 @@ export const ServicesManager: React.FC = () => {
                   <img
                     src={service.image}
                     alt={service.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
                   {service.popular && (
-                    <span className="absolute top-3 left-3 bg-[#E5C158] text-[#3D2314] text-[10px] font-bold uppercase px-2.5 py-1 rounded-full shadow-sm">
+                    <span className="absolute top-3 left-3 bg-[#E5C158] text-[#3D2314] text-[10px] font-bold uppercase px-3 py-1 rounded-full shadow-sm border border-white/50">
                       Destaque
                     </span>
                   )}
                 </div>
               ) : (
-                <div className="h-32 bg-[#F8F5F2] flex items-center justify-center text-[#C5A059] relative">
+                <div className="h-32 bg-[#F8F5F2]/80 flex items-center justify-center text-[#C5A059] relative">
                   <Sparkles className="w-8 h-8 opacity-40" />
                 </div>
               )}
@@ -136,7 +136,7 @@ export const ServicesManager: React.FC = () => {
               <div className="p-5 space-y-3">
                 <div className="flex items-start justify-between gap-2">
                   <h4 className="font-serif font-bold text-base text-[#523626]">{service.name}</h4>
-                  <span className="text-[10px] font-bold text-[#C5A059] uppercase bg-[#F8F5F2] px-2 py-0.5 rounded-md border border-[#E5C158]/20 shrink-0">
+                  <span className="text-[10px] font-bold text-[#8C6E5D] uppercase bg-[#F8F5F2] px-2.5 py-0.5 rounded-full border border-[#E5C158]/30 shrink-0">
                     {service.category}
                   </span>
                 </div>
@@ -145,8 +145,8 @@ export const ServicesManager: React.FC = () => {
                   {service.description}
                 </p>
 
-                <div className="flex items-center justify-between text-xs pt-2 border-t border-[#EADEDA]/60">
-                  <div className="flex items-center gap-1.5 text-[#523626]">
+                <div className="flex items-center justify-between text-xs pt-3 border-t border-[#EADEDA]/60">
+                  <div className="flex items-center gap-1.5 text-[#523626] font-medium">
                     <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
                     <span>{service.duration}</span>
                   </div>
@@ -158,17 +158,17 @@ export const ServicesManager: React.FC = () => {
             </div>
 
             {/* Actions */}
-            <div className="p-4 bg-[#F8F5F2] border-t border-[#EADEDA]/60 flex items-center justify-end gap-2">
+            <div className="p-4 bg-[#F8F5F2]/80 border-t border-[#EADEDA]/60 flex items-center justify-end gap-2">
               <button
                 onClick={() => openEditModal(service)}
-                className="bg-white hover:bg-[#EADEDA] text-[#523626] border border-[#EADEDA] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5"
+                className="bg-white hover:bg-[#EADEDA] text-[#523626] border border-[#EADEDA] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
               >
                 <Edit3 className="w-3.5 h-3.5 text-[#C5A059]" />
                 <span>Editar</span>
               </button>
               <button
                 onClick={() => setDeleteConfirmId(service.id)}
-                className="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5"
+                className="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>Excluir</span>
@@ -181,11 +181,11 @@ export const ServicesManager: React.FC = () => {
 
       {/* Service Modal (Add / Edit) */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white rounded-3xl border border-[#E5C158] p-6 max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
+          <div className="bg-white/95 backdrop-blur-xl rounded-3xl border border-[#E5C158]/50 p-6 sm:p-8 max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 text-gray-500"
+              className="absolute top-5 right-5 p-2 rounded-full hover:bg-gray-100 text-[#8C6E5D] transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -208,7 +208,7 @@ export const ServicesManager: React.FC = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ex: Alongamento em Fibra de Vidro"
-                  className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626]"
+                  className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
                 />
               </div>
 
@@ -220,7 +220,7 @@ export const ServicesManager: React.FC = () => {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value as any)}
-                    className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626] bg-white"
+                    className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626] bg-white/95 focus:border-[#E5C158] outline-none"
                   >
                     <option value="alongamento">Alongamento</option>
                     <option value="gel">Gel / Blindagem</option>
@@ -240,7 +240,7 @@ export const ServicesManager: React.FC = () => {
                     value={duration}
                     onChange={(e) => setDuration(e.target.value)}
                     placeholder="Ex: 90 min"
-                    className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626]"
+                    className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626] bg-white/95 focus:border-[#E5C158] outline-none"
                   />
                 </div>
               </div>
@@ -256,7 +256,7 @@ export const ServicesManager: React.FC = () => {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     placeholder="Ex: A partir de R$ 180,00"
-                    className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626]"
+                    className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626] bg-white/95 focus:border-[#E5C158] outline-none"
                   />
                 </div>
 
@@ -269,7 +269,7 @@ export const ServicesManager: React.FC = () => {
                     value={numericPrice}
                     onChange={(e) => setNumericPrice(Number(e.target.value))}
                     placeholder="180"
-                    className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626]"
+                    className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626] bg-white/95 focus:border-[#E5C158] outline-none"
                   />
                 </div>
               </div>
@@ -283,7 +283,7 @@ export const ServicesManager: React.FC = () => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Descreva a técnica, durabilidade e benefícios..."
-                  className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626]"
+                  className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626] bg-white/95 focus:border-[#E5C158] outline-none"
                 />
               </div>
 
@@ -296,7 +296,7 @@ export const ServicesManager: React.FC = () => {
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                   placeholder="https://..."
-                  className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626]"
+                  className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626] bg-white/95 focus:border-[#E5C158] outline-none"
                 />
               </div>
 
@@ -308,7 +308,7 @@ export const ServicesManager: React.FC = () => {
                   onChange={(e) => setPopular(e.target.checked)}
                   className="w-4 h-4 text-[#E5C158] rounded border-gray-300 focus:ring-[#E5C158]"
                 />
-                <label htmlFor="popularCheck" className="text-xs font-bold text-[#523626]">
+                <label htmlFor="popularCheck" className="text-xs font-bold text-[#523626] cursor-pointer">
                   Marcar como Serviço em Destaque
                 </label>
               </div>
@@ -317,13 +317,13 @@ export const ServicesManager: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 py-3 rounded-full border border-[#EADEDA] text-xs font-bold text-[#7D5E4D]"
+                  className="flex-1 py-3 rounded-full border border-[#EADEDA] text-xs font-bold text-[#7D5E4D] hover:bg-gray-50 cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-3 rounded-full bg-gradient-to-r from-[#E5C158] to-[#C5A059] text-[#3D2314] text-xs font-bold uppercase tracking-wider shadow-md"
+                  className="flex-1 py-3 rounded-full bg-gradient-to-r from-[#E5C158] via-[#FFD700] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] text-xs font-bold uppercase tracking-wider shadow-md shadow-[#E5C158]/20 cursor-pointer"
                 >
                   Salvar Serviço
                 </button>
@@ -336,8 +336,11 @@ export const ServicesManager: React.FC = () => {
 
       {/* Delete Confirmation Modal */}
       {deleteConfirmId && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white rounded-3xl border border-[#E5C158] p-6 max-w-sm w-full shadow-2xl text-center">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
+          <div className="bg-white/95 backdrop-blur-xl rounded-3xl border border-[#E5C158]/50 p-6 max-w-sm w-full shadow-2xl text-center">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center mx-auto mb-4 text-rose-600 shadow-xs">
+              <Trash2 className="w-6 h-6" />
+            </div>
             <h3 className="font-serif font-bold text-lg text-[#523626] mb-2">Excluir Serviço</h3>
             <p className="text-xs text-[#7D5E4D] mb-6">
               Tem certeza que deseja remover este serviço do catálogo? Esta ação não pode ser desfeita.
@@ -345,13 +348,13 @@ export const ServicesManager: React.FC = () => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="flex-1 py-2.5 rounded-full border border-[#EADEDA] text-xs font-bold text-[#7D5E4D]"
+                className="flex-1 py-2.5 rounded-full border border-[#EADEDA] text-xs font-bold text-[#7D5E4D] hover:bg-gray-50 cursor-pointer"
               >
                 Voltar
               </button>
               <button
                 onClick={() => handleDelete(deleteConfirmId)}
-                className="flex-1 py-2.5 rounded-full bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 shadow-md"
+                className="flex-1 py-2.5 rounded-full bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 shadow-md cursor-pointer"
               >
                 Excluir
               </button>

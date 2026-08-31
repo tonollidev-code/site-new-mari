@@ -25,7 +25,7 @@ export const Testimonials: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="py-20 lg:py-24 bg-[#F8F5F2] border-b border-[#EADEDA] relative overflow-hidden">
+    <section id="testimonials" className="py-20 lg:py-24 bg-[#F8F5F2]/80 backdrop-blur-[2px] border-b border-[#EADEDA] relative overflow-hidden">
       
       {/* Subtle Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#E5C158]/5 rounded-full blur-3xl pointer-events-none" />

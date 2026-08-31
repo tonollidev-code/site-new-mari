@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
   return (
     <>
       {/* Top Banner Info Bar */}
-      <div id="top-bar" className="bg-[#523626] text-[#EADEDA] text-[11px] sm:text-xs py-2 px-4 border-b border-[#E5C158]/20 transition-all duration-300">
+      <div id="top-bar" className="relative z-50 bg-[#523626] text-[#EADEDA] text-[11px] sm:text-xs py-2 px-4 border-b border-[#E5C158]/20 transition-all duration-300">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-4 text-center sm:text-left">
             <span className="flex items-center gap-1.5 text-gray-200">
