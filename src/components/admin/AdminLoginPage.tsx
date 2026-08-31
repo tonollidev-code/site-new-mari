@@ -43,7 +43,7 @@ export const AdminLoginPage: React.FC = () => {
             Acesso Restrito
           </span>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#523626] mt-3">
-            Mari Nail Designer
+            Mariana Leone
           </h1>
           <p className="text-xs text-[#8C6E5D] mt-1 font-serif italic">
             Painel Administrativo do Estúdio

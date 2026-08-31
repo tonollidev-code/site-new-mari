@@ -24,7 +24,6 @@ export const Header: React.FC = () => {
     { label: 'Sobre', id: 'about' },
     { label: 'Serviços', id: 'services' },
     { label: 'Galeria', id: 'gallery' },
-    { label: 'FAQ', id: 'faq' },
     { label: 'Contato', id: 'location' },
   ];
 
@@ -70,7 +69,7 @@ export const Header: React.FC = () => {
         id="main-header"
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-[#E5C158]/20 py-3'
+            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#E5C158]/25 py-3'
             : 'bg-white border-b border-[#EADEDA]/60 py-4'
         }`}
       >
@@ -78,20 +77,20 @@ export const Header: React.FC = () => {
           {/* Logo */}
           <button
             onClick={() => handleNavClick('hero')}
-            className="flex items-center gap-3 group text-left"
+            className="flex items-center gap-3 group text-left cursor-pointer"
           >
             <img
               src="https://i.postimg.cc/y6wg2q7F/Whats-App-Image-2026-08-08-at-21-38-19.jpg"
               referrerPolicy="no-referrer"
-              alt="Mari Nail Designer Logo"
-              className="w-11 h-11 rounded-full object-cover border-2 border-[#E5C158] shadow-xs group-hover:scale-105 transition-transform"
+              alt="Mariana Leone Logo"
+              className="w-11 h-11 rounded-full object-cover border border-[#E5C158]/60 shadow-xs group-hover:scale-105 transition-transform duration-300"
             />
             <div className="flex flex-col">
               <span className="text-base sm:text-lg font-serif font-bold tracking-wider uppercase text-[#523626] leading-tight">
-                Mari <span className="text-[#C5A059]">Nail Designer</span>
+                Mariana <span className="text-[#C5A059]">Leone</span>
               </span>
               <span className="text-[10px] tracking-[0.3em] text-[#A38675] uppercase font-sans font-medium">
-                Premium
+                Nail Designer
               </span>
             </div>
           </button>
@@ -102,7 +101,7 @@ export const Header: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className="hover:text-[#C5A059] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#E5C158] hover:after:w-full after:transition-all after:duration-300"
+                className="hover:text-[#C5A059] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#E5C158] hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
               >
                 {item.label}
               </button>
@@ -114,7 +113,7 @@ export const Header: React.FC = () => {
             {isAuthorizedAdmin && (
               <button
                 onClick={() => navigate('/admin')}
-                className="bg-[#523626] hover:bg-[#3D2314] text-[#E5C158] border border-[#E5C158]/40 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm flex items-center gap-1.5 transition-all"
+                className="bg-[#523626] hover:bg-[#3D2314] text-[#E5C158] border border-[#E5C158]/40 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
               >
                 <ShieldCheck className="w-4 h-4 text-[#E5C158]" />
                 <span>Painel Admin</span>
@@ -123,9 +122,9 @@ export const Header: React.FC = () => {
             <button
               id="header-booking-btn"
               onClick={() => handleNavClick('booking')}
-              className="bg-gradient-to-r from-[#E5C158] via-[#F5E5C9] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-md hover:shadow-lg shadow-[#E5C158]/20 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center gap-2"
+              className="bg-gradient-to-r from-[#E5C158] via-[#F5E5C9] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-md hover:shadow-lg shadow-[#E5C158]/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 cursor-pointer"
             >
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-3.5 h-3.5" />
               <span>Agendar Horário</span>
             </button>
           </div>
@@ -134,14 +133,14 @@ export const Header: React.FC = () => {
           <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={() => handleNavClick('booking')}
-              className="bg-[#E5C158] text-[#3D2314] px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-sm"
+              className="bg-[#E5C158] text-[#3D2314] px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-xs"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Agendar</span>
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#523626] hover:bg-[#F8F5F2] transition-colors"
+              className="p-2 rounded-xl text-[#523626] hover:bg-[#F8F5F2] transition-colors"
               aria-label="Abrir Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6 text-[#E5C158]" /> : <Menu className="w-6 h-6" />}
@@ -159,32 +158,32 @@ export const Header: React.FC = () => {
                     <img
                       src="https://i.postimg.cc/y6wg2q7F/Whats-App-Image-2026-08-08-at-21-38-19.jpg"
                       referrerPolicy="no-referrer"
-                      alt="Mari Nail Designer Logo"
+                      alt="Mariana Leone Logo"
                       className="w-10 h-10 rounded-full object-cover border border-[#E5C158]"
                     />
                     <div className="flex flex-col">
                       <span className="font-serif font-bold text-base text-[#523626] leading-tight">
-                        Mari <span className="text-[#C5A059]">Nail Designer</span>
+                        Mariana <span className="text-[#C5A059]">Leone</span>
                       </span>
                       <span className="text-[9px] tracking-[0.25em] text-[#A38675] uppercase font-sans font-medium">
-                        Premium
+                        Nail Designer
                       </span>
                     </div>
                   </div>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-1.5 rounded-full hover:bg-gray-100 text-gray-500"
+                    className="p-1.5 rounded-full hover:bg-gray-100 text-gray-500 cursor-pointer"
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-5 h-5" />
                   </button>
                 </div>
 
-                <div className="py-6 flex flex-col gap-4">
+                <div className="py-6 flex flex-col gap-2">
                   {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => handleNavClick(item.id)}
-                      className="text-left py-2.5 px-3 rounded-xl hover:bg-[#F8F5F2] text-sm font-semibold uppercase tracking-wider text-[#523626] flex items-center justify-between hover:text-[#C5A059] transition-all"
+                      className="text-left py-3 px-4 rounded-xl hover:bg-[#F8F5F2] text-xs font-semibold uppercase tracking-wider text-[#523626] flex items-center justify-between hover:text-[#C5A059] transition-all cursor-pointer"
                     >
                       <span>{item.label}</span>
                       <Sparkles className="w-3.5 h-3.5 text-[#E5C158]" />
@@ -200,7 +199,7 @@ export const Header: React.FC = () => {
                       setMobileMenuOpen(false);
                       navigate('/admin');
                     }}
-                    className="w-full bg-[#523626] hover:bg-[#3D2314] text-[#E5C158] py-2.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-[#E5C158]/40"
+                    className="w-full bg-[#523626] hover:bg-[#3D2314] text-[#E5C158] py-2.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-[#E5C158]/40 cursor-pointer"
                   >
                     <ShieldCheck className="w-4 h-4 text-[#E5C158]" />
                     <span>Painel Admin</span>
@@ -208,7 +207,7 @@ export const Header: React.FC = () => {
                 )}
                 <button
                   onClick={() => handleNavClick('booking')}
-                  className="w-full bg-[#E5C158] hover:bg-[#C5A059] text-[#3D2314] py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2"
+                  className="w-full bg-[#E5C158] hover:bg-[#C5A059] text-[#3D2314] py-3.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Agendar Meu Horário</span>

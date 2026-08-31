@@ -8,12 +8,21 @@
     --font-script: 'Alex Brush', cursive;
   }
   
+  html {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     font-family: var(--font-sans);
+    color: #3D2B20;
+    background-color: #FCFAF7;
   }
   
-  h1, h2, h3, .font-serif {
+  h1, h2, h3, h4, .font-serif {
     font-family: var(--font-serif);
+    letter-spacing: -0.02em;
   }
 
   .font-delicate {
@@ -25,41 +34,37 @@
   }
 }
 
-/* Custom Gold & Nude Luxury Utilities */
+/* Minimalist Luxury Utilities */
+.text-gold-subtle {
+  color: #C5A059;
+}
+
 .text-gold-gradient {
-  background: linear-gradient(135deg, #E5C158 0%, #F5E5C9 50%, #C5A059 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #C5A059;
 }
 
-.bg-gold-gradient {
-  background: linear-gradient(135deg, #E5C158 0%, #F5E5C9 50%, #C5A059 100%);
+/* Editorial subtle luxury shadow */
+.shadow-luxury {
+  box-shadow: 0 10px 30px -10px rgba(44, 24, 16, 0.05), 0 2px 8px -2px rgba(44, 24, 16, 0.02);
 }
 
-.bg-gold-subtle {
-  background: linear-gradient(135deg, rgba(229, 193, 88, 0.12) 0%, rgba(245, 229, 201, 0.05) 100%);
-}
-
-.border-gold-glow {
-  box-shadow: 0 0 15px rgba(229, 193, 88, 0.25);
-}
-
-.gold-border {
-  border-color: rgba(229, 193, 88, 0.35);
+.shadow-luxury-hover {
+  box-shadow: 0 16px 36px -12px rgba(44, 24, 16, 0.09), 0 0 0 1px rgba(197, 160, 89, 0.2);
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #FCFAF7;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E2D3C1;
+  background: #DFD7CD;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
+  background: #C5A059;
 }
+
 

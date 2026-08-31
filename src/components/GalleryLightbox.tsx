@@ -21,12 +21,12 @@ export const GalleryLightbox: React.FC = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#2C1810] rounded-3xl max-w-3xl w-full border border-[#E5C158]/50 shadow-2xl overflow-hidden relative flex flex-col"
+        className="bg-[#2C1810] rounded-3xl max-w-3xl w-full border border-[#C5A059]/40 shadow-2xl overflow-hidden relative flex flex-col"
       >
         {/* Close Button */}
         <button
           onClick={() => setLightboxImage(null)}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 text-white hover:bg-black transition-colors"
+          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 text-white hover:bg-black transition-colors cursor-pointer"
         >
           <X className="w-6 h-6" />
         </button>
@@ -41,12 +41,12 @@ export const GalleryLightbox: React.FC = () => {
         </div>
 
         {/* Minimal Action Bar */}
-        <div className="p-4 sm:p-6 bg-[#2C1810] flex items-center justify-between gap-4 border-t border-[#E5C158]/20">
+        <div className="p-4 sm:p-6 bg-[#2C1810] flex items-center justify-between gap-4 border-t border-[#DFD7CD]/20">
           <button
             onClick={handleBookLook}
-            className="w-full bg-gradient-to-r from-[#E5C158] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg flex items-center justify-center gap-2 transition-all"
+            className="w-full bg-[#C5A059] hover:bg-[#D4AF37] text-[#1A0C06] py-3.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-luxury flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
-            <Calendar className="w-4 h-4" />
+            <Calendar className="w-4 h-4 text-[#1A0C06]" />
             <span>Agendar Este Modelo</span>
           </button>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
 import { Instagram, ExternalLink } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export const InstagramGrid: React.FC = () => {
   const { config } = useApp();
@@ -37,63 +38,79 @@ export const InstagramGrid: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#FCFAF7] border-b border-[#EADEDA]/60 relative">
+    <section className="py-20 lg:py-24 bg-[#FCFAF7] border-b border-[#EADEDA]/60 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F8F5F2] border border-[#D4AF37]/30 text-[#B8860B] text-xs font-bold uppercase tracking-widest mb-3">
-            <Instagram className="w-4 h-4 text-[#D4AF37]" />
-            <span>Redes Sociais</span>
+        <motion.div 
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-14"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#DFD7CD] text-[#8C6E5D] text-[11px] font-bold uppercase tracking-[0.2em] mb-3 shadow-xs">
+            <Instagram className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span>Inspirações Diárias</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mb-3">
-            Acompanhe meu trabalho
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mb-3 tracking-tight">
+            Acompanhe no Instagram
           </h2>
-          <p className="text-base text-[#7A6354] font-serif italic">
-            Mais inspirações, novidades e resultados no Instagram {config.instagramHandle}.
+          <p className="text-base text-[#735747] font-serif italic font-normal">
+            Mais inspirações, novidades e resultados no perfil {config.instagramHandle}.
           </p>
-        </div>
+        </motion.div>
 
         {/* 4 Grid Images */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 mb-10">
-          {instaPosts.map((post) => (
-            <a
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
+          {instaPosts.map((post, idx) => (
+            <motion.a
               key={post.id}
               href="https://instagram.com/leonesnail"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative aspect-square rounded-2xl overflow-hidden border border-[#EADEDA] shadow-xs hover:shadow-xl transition-all duration-300"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative aspect-square rounded-2xl overflow-hidden border border-[#DFD7CD] shadow-luxury hover:shadow-luxury-hover transition-all duration-300"
             >
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
                 loading="lazy"
               />
 
-              {/* Clean Hover Overlay with no text */}
-              <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <div className="p-3 rounded-full bg-white/90 text-[#2C1810] shadow-md group-hover:scale-110 transition-transform duration-300">
-                  <Instagram className="w-4 h-4 text-[#B8860B]" />
+              {/* Clean Luxury Hover Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="p-3 rounded-full bg-white/95 text-[#2C1810] shadow-md group-hover:scale-110 transition-transform duration-300">
+                  <Instagram className="w-4 h-4 text-[#C5A059]" />
                 </div>
               </div>
-            </a>
+            </motion.a>
           ))}
         </div>
 
         {/* CTA Button */}
-        <div className="text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-20px' }}
+          transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center"
+        >
           <a
             href="https://instagram.com/leonesnail"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#2C1810] hover:bg-[#D4AF37] text-white hover:text-[#2C1810] px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-md border border-[#D4AF37]/30"
+            className="inline-flex items-center gap-2.5 bg-[#2C1810] hover:bg-[#3D2314] text-[#FCFAF7] px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xs hover:shadow-md border border-[#2C1810] transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
-            <Instagram className="w-4 h-4 text-[#D4AF37]" />
+            <Instagram className="w-4 h-4 text-[#C5A059]" />
             <span>Seguir no Instagram ({config.instagramHandle})</span>
             <ExternalLink className="w-3.5 h-3.5 ml-1 opacity-70" />
           </a>
-        </div>
+        </motion.div>
 
       </div>
     </section>

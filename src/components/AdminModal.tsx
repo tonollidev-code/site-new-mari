@@ -100,7 +100,7 @@ export const AdminModal: React.FC = () => {
             </div>
             <div>
               <h3 className="font-serif font-bold text-lg text-[#E5C158]">
-                Painel do Estúdio — Mari Nail Designer
+                Painel do Estúdio — Mariana Leone
               </h3>
               <p className="text-xs text-gray-300">
                 {isAuthorized ? `Autenticado como: ${ALLOWED_ADMIN_EMAIL}` : 'Acesso Restrito — Autenticação Google'}

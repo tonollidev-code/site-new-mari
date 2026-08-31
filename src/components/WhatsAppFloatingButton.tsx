@@ -15,10 +15,10 @@ export const WhatsAppFloatingButton: React.FC = () => {
 
       {/* Floating Button */}
       <a
-        href={getWhatsAppUrl('Olá, Mari! Vim pelo seu site e gostaria de agendar um horário. 💅✨')}
+        href={getWhatsAppUrl('Olá, Mariana Leone! Vim pelo seu site e gostaria de agendar um horário. 💅✨')}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Falar no WhatsApp com Mari Nail Designer"
+        aria-label="Falar no WhatsApp com Mariana Leone"
         className="w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-110 active:scale-95 ring-4 ring-white/30 relative"
       >
         {/* Pulsing ring */}

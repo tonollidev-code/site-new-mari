@@ -245,7 +245,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         id: 'user-admin-1',
         email: cleanEmail,
         role: 'admin',
-        name: 'Mari Nail Admin',
+        name: 'Mariana Leone Admin',
       };
       localStorage.setItem('mari_nail_auth_token', 'admin_static_token_2026');
       localStorage.setItem('mari_nail_auth_user', JSON.stringify(adminUser));
@@ -446,7 +446,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   // Helpers
   const getWhatsAppUrl = (customMessage?: string) => {
-    const defaultMsg = 'Olá, Mari! Vim pelo seu site e gostaria de agendar um horário. 💅✨';
+    const defaultMsg = 'Olá, Mariana Leone! Vim pelo seu site e gostaria de agendar um horário. 💅✨';
     const text = encodeURIComponent(customMessage || defaultMsg);
     const cleanNumber = config.whatsappNumber.replace(/\D/g, '');
     return `https://wa.me/${cleanNumber}?text=${text}`;

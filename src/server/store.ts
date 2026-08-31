@@ -47,10 +47,10 @@ const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
 const DEFAULT_BUSINESS_HOURS: BusinessHours = {
   workingDays: ['terca', 'quarta', 'quinta', 'sexta', 'sabado'],
-  openTime: '09:00',
-  closeTime: '19:00',
+  openTime: '14:00',
+  closeTime: '20:00',
   slotInterval: 90,
-  availableSlots: ['09:00', '10:30', '13:00', '14:30', '16:00', '17:30'],
+  availableSlots: ['14:00', '15:30', '17:00', '18:30', '20:00'],
 };
 
 function initDb(): DatabaseSchema {
@@ -62,7 +62,7 @@ function initDb(): DatabaseSchema {
     email: adminEmail,
     passwordHash: hashPassword(adminPass),
     role: 'admin',
-    name: 'Mari Nail Admin',
+    name: 'Mariana Leone Admin',
   };
 
   const initialData: DatabaseSchema = {
@@ -158,7 +158,7 @@ class Store {
           email: cleanEmail,
           passwordHash: hashPassword(process.env.ADMIN_PASSWORD || 'admin123'),
           role: 'admin',
-          name: 'Mari Nail Admin',
+          name: 'Mariana Leone Admin',
         };
         this.data.users.push(user);
       } else {

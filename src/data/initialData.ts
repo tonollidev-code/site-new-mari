@@ -6,7 +6,7 @@ export const INITIAL_CONFIG: StudioConfig = {
   instagramHandle: '@leonesnail',
   address: 'Rua São Vicente das Minas, 47',
   addressShort: 'Rua São Vicente das Minas, 47',
-  operatingHours: 'Terça a Sábado: 09h às 19h | Domingo e Segunda: Fechado',
+  operatingHours: 'Terça a Sexta: a partir das 14h | Sábado: a partir das 09h | Domingo e Segunda: Fechado',
   googleMapsEmbedUrl: 'https://maps.google.com/maps?q=Rua%20S%C3%A3o%20Vicente%20das%20Minas%2C%2047&t=&z=16&ie=UTF8&iwloc=&output=embed'
 };
 
@@ -234,7 +234,7 @@ export const INITIAL_BLOG_POSTS: BlogPost[] = [
     date: '02 Agost 2026',
     readTime: '3 min de leitura',
     image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=800&auto=format&fit=crop',
-    author: 'Mari Nail Designer'
+    author: 'Mariana Leone'
   },
   {
     id: 'post-2',
@@ -244,7 +244,7 @@ export const INITIAL_BLOG_POSTS: BlogPost[] = [
     date: '28 Julho 2026',
     readTime: '4 min de leitura',
     image: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=800&auto=format&fit=crop',
-    author: 'Mari Nail Designer'
+    author: 'Mariana Leone'
   }
 ];
 

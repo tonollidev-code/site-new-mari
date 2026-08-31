@@ -15,7 +15,6 @@ import { BeforeAfter } from './components/BeforeAfter';
 import { InstagramGrid } from './components/InstagramGrid';
 import { HowItWorks } from './components/HowItWorks';
 import { BookingSection } from './components/BookingSection';
-import { FAQSection } from './components/FAQSection';
 import { LocationSection } from './components/LocationSection';
 import { CTASection } from './components/CTASection';
 import { Footer } from './components/Footer';
@@ -32,7 +31,7 @@ function MainContent() {
     return (
       <div className="min-h-screen bg-[#FCFAF7] flex flex-col items-center justify-center p-4">
         <div className="w-12 h-12 rounded-full border-4 border-[#E5C158] border-t-transparent animate-spin mb-4" />
-        <p className="font-serif text-sm font-bold text-[#523626]">Mari Nail Designer</p>
+        <p className="font-serif text-sm font-bold text-[#523626]">Mariana Leone</p>
         <p className="text-xs text-[#8C6E5D]">Carregando ambiente seguro...</p>
       </div>
     );
@@ -72,7 +71,6 @@ function MainContent() {
         <InstagramGrid />
         <HowItWorks />
         <BookingSection />
-        <FAQSection />
         <LocationSection />
         <CTASection />
       </main>

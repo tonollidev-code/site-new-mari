@@ -1,0 +1,104 @@
+{
+  "users": [
+    {
+      "id": "user-admin-1",
+      "email": "tonollibrenno@gmail.com",
+      "passwordHash": "00e4d3e440ea6189ce9b7e6d636b75d8b3b1904d23e83612e2124b736a10ee12",
+      "role": "admin",
+      "name": "Mari Nail Admin"
+    }
+  ],
+  "services": [
+    {
+      "id": "alongamento-fibra",
+      "name": "Alongamento em Fibra de Vidro",
+      "category": "alongamento",
+      "description": "Técnica moderna que proporciona unhas longas, naturais, resistentes e com acabamento finíssimo.",
+      "duration": "120 min",
+      "price": "A partir de R$ 180,00",
+      "numericPrice": 180,
+      "popular": true,
+      "iconName": "Sparkles",
+      "image": "https://i.postimg.cc/brszvv8Q/Whats-App-Image-2026-08-08-at-16-40-37.jpg"
+    },
+    {
+      "id": "alongamento-molde-f1",
+      "name": "Molde F1",
+      "category": "alongamento",
+      "description": "Técnica moderna e ágil com molde F1 em gel. Proporciona unhas com curvatura perfeita, brilho incomparável e excelente durabilidade.",
+      "duration": "90 min",
+      "price": "A partir de R$ 160,00",
+      "numericPrice": 160,
+      "popular": true,
+      "iconName": "Sparkles",
+      "image": "https://i.postimg.cc/Hx7mGhtN/Whats-App-Image-2026-08-08-at-16-42-50.jpg"
+    },
+    {
+      "id": "banho-de-gel",
+      "name": "Banho de Gel / Blindagem",
+      "category": "gel",
+      "description": "Camada protetora de gel sobre a unha natural. Fortalece, evita quebras e garante brilho intenso por semanas.",
+      "duration": "90 min",
+      "price": "A partir de R$ 120,00",
+      "numericPrice": 120,
+      "popular": true,
+      "iconName": "ShieldCheck",
+      "image": "https://i.postimg.cc/pLGMmHcV/Whats-App-Image-2026-08-08-at-16-43-22.jpg"
+    },
+    {
+      "id": "manutencao-alongamento",
+      "name": "Manutenção",
+      "category": "manutencao",
+      "description": "Reposição da estrutura de gel/fibra, nivelamento e novo acabamento para manter as unhas sempre impecáveis.",
+      "duration": "90 min",
+      "price": "A partir de R$ 110,00",
+      "numericPrice": 110,
+      "popular": false,
+      "iconName": "RefreshCw",
+      "image": "https://i.postimg.cc/fbtpk00Y/Whats-App-Image-2026-08-08-at-21-38-19-(1).jpg"
+    },
+    {
+      "id": "esmaltacao-gel",
+      "name": "Esmaltação em Gel",
+      "category": "gel",
+      "description": "Esmalte secado em cabine LED/UV. Secagem imediata, durabilidade de até 20 dias sem descascar.",
+      "duration": "60 min",
+      "price": "A partir de R$ 85,00",
+      "numericPrice": 85,
+      "popular": false,
+      "iconName": "Gem",
+      "image": "https://i.postimg.cc/wjPbKTb9/Whats-App-Image-2026-08-08-at-21-38-20.jpg"
+    }
+  ],
+  "bookings": [],
+  "businessHours": {
+    "workingDays": [
+      "terca",
+      "quarta",
+      "quinta",
+      "sexta",
+      "sabado"
+    ],
+    "openTime": "09:00",
+    "closeTime": "19:00",
+    "slotInterval": 90,
+    "availableSlots": [
+      "09:00",
+      "10:30",
+      "13:00",
+      "14:30",
+      "16:00",
+      "17:30"
+    ]
+  },
+  "blockedSlots": [],
+  "config": {
+    "whatsappNumber": "5511995866952",
+    "whatsappDisplay": "(11) 99586-6952",
+    "instagramHandle": "@leonesnail",
+    "address": "Rua São Vicente das Minas, 47",
+    "addressShort": "Rua São Vicente das Minas, 47",
+    "operatingHours": "Terça a Sexta: a partir das 14h | Sábado: a partir das 09h | Domingo e Segunda: Fechado",
+    "googleMapsEmbedUrl": "https://maps.google.com/maps?q=Rua%20S%C3%A3o%20Vicente%20das%20Minas%2C%2047&t=&z=16&ie=UTF8&iwloc=&output=embed"
+  }
+}

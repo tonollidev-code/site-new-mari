@@ -61,7 +61,7 @@ export const AdminDashboardPage: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="font-serif font-bold text-base sm:text-lg text-[#523626] leading-tight">
-                  Mari Nail Designer
+                  Mariana Leone
                 </h1>
                 <span className="bg-[#F8F5F2] text-[#C5A059] border border-[#E5C158]/40 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-[#C5A059]" />

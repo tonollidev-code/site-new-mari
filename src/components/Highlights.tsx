@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles, HeartHandshake, ShieldCheck, Gem } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export const Highlights: React.FC = () => {
   const differentials = [
@@ -30,40 +31,44 @@ export const Highlights: React.FC = () => {
   ];
 
   return (
-    <section className="py-12 bg-white relative border-b border-[#EADEDA]/60">
+    <section className="py-14 bg-white relative border-b border-[#EADEDA]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {differentials.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div
+              <motion.div
                 key={idx}
-                className="group p-6 rounded-2xl bg-[#FCFAF7] border border-[#EADEDA] hover:border-[#D4AF37] hover:bg-white shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="group p-6 rounded-2xl bg-[#FCFAF7] border border-[#EADEDA]/80 hover:border-[#E5C158]/70 hover:bg-white transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-luxury-hover"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#F8F5F2] border border-[#D4AF37]/30 text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs">
-                      <Icon className="w-6 h-6" />
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-10 h-10 rounded-xl bg-white border border-[#DFD7CD] text-[#C5A059] group-hover:bg-[#2C1810] group-hover:text-[#F5EFEB] group-hover:border-[#2C1810] flex items-center justify-center transition-all duration-300">
+                      <Icon className="w-4 h-4" />
                     </div>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-[#B8860B] bg-[#F8F5F2] px-2.5 py-1 rounded-full border border-[#D4AF37]/20">
+                    <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#8C6E5D] bg-white px-2.5 py-0.5 rounded-full border border-[#DFD7CD]">
                       {item.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-serif font-bold text-[#1A1A1A] mb-2 group-hover:text-[#B8860B] transition-colors">
+                  <h3 className="text-base font-serif font-bold text-[#2C1810] mb-2 group-hover:text-[#C5A059] transition-colors">
                     {item.title}
                   </h3>
 
-                  <p className="text-xs text-[#666666] leading-relaxed">
+                  <p className="text-xs text-[#6E5648] leading-relaxed font-normal">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-[#EADEDA]/40 flex items-center text-[11px] font-semibold text-[#D4AF37]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mr-2"></span>
+                <div className="mt-5 pt-3.5 border-t border-[#EADEDA]/60 flex items-center text-[11px] font-semibold text-[#8C6E5D]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] mr-2 transition-transform duration-300 group-hover:scale-125"></span>
                   Garantia de Satisfação
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
