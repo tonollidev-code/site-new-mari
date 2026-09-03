@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { X, Calendar, DollarSign, Settings, Check, ShieldCheck, Lock, LogOut, AlertCircle } from 'lucide-react';
 
-const ALLOWED_ADMIN_EMAIL = 'tonollibrenno@gmail.com';
+const ALLOWED_ADMIN_EMAIL = (import.meta.env.VITE_ADMIN_EMAIL as string) || '';
 
 export const AdminModal: React.FC = () => {
   const {

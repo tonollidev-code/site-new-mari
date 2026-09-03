@@ -344,7 +344,7 @@ export const BookingSection: React.FC = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-[#482D1F] hover:bg-[#3D2418] text-[#FCFAF7] py-4 rounded-full font-bold uppercase tracking-widest text-xs shadow-xs hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer border border-[#482D1F]"
+                className="w-full bg-[#482D1F] hover:bg-[#3D2418] text-[#FCFAF7] py-4 rounded-full font-bold uppercase tracking-widest text-xs shadow-xs hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
                 <span>Confirmar Agendamento</span>

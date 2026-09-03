@@ -251,14 +251,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
 
     // Client-side fallback for static deployments (e.g. Vercel static hosting)
-    if (cleanEmail === 'tonollibrenno@gmail.com' && (cleanPass === 'admin123' || cleanPass.length >= 6)) {
+    const staticAdminEmail = (import.meta.env.VITE_ADMIN_EMAIL as string)?.toLowerCase();
+    if (staticAdminEmail && cleanEmail === staticAdminEmail && cleanPass.length >= 6) {
       const adminUser: AuthUser = {
         id: 'user-admin-1',
         email: cleanEmail,
         role: 'admin',
         name: 'Mariana Leone Admin',
       };
-      localStorage.setItem('mari_nail_auth_token', 'admin_static_token_2026');
+      localStorage.setItem('mari_nail_auth_token', 'session_' + Date.now());
       localStorage.setItem('mari_nail_auth_user', JSON.stringify(adminUser));
       setCurrentUser(adminUser);
       return { success: true };

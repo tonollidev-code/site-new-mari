@@ -42,8 +42,8 @@ export function hashPassword(password: string): string {
   return crypto.createHash('sha256').update(password).digest('hex');
 }
 
-const DEFAULT_ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'tonollibrenno@gmail.com';
-const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const DEFAULT_ADMIN_EMAIL = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 
 const DEFAULT_BUSINESS_HOURS: BusinessHours = {
   workingDays: ['terca', 'quarta', 'quinta', 'sexta', 'sabado'],
@@ -54,19 +54,22 @@ const DEFAULT_BUSINESS_HOURS: BusinessHours = {
 };
 
 function initDb(): DatabaseSchema {
-  const adminEmail = (process.env.ADMIN_EMAIL || 'tonollibrenno@gmail.com').toLowerCase();
-  const adminPass = process.env.ADMIN_PASSWORD || 'admin123';
+  const adminEmail = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+  const adminPass = process.env.ADMIN_PASSWORD || '';
 
-  const adminUser: User = {
-    id: 'user-admin-1',
-    email: adminEmail,
-    passwordHash: hashPassword(adminPass),
-    role: 'admin',
-    name: 'Mariana Leone Admin',
-  };
+  const initialUsers: User[] = [];
+  if (adminEmail && adminPass) {
+    initialUsers.push({
+      id: 'user-admin-1',
+      email: adminEmail,
+      passwordHash: hashPassword(adminPass),
+      role: 'admin',
+      name: 'Mariana Leone Admin',
+    });
+  }
 
   const initialData: DatabaseSchema = {
-    users: [adminUser],
+    users: initialUsers,
     services: INITIAL_SERVICES,
     bookings: [],
     businessHours: DEFAULT_BUSINESS_HOURS,
@@ -89,18 +92,26 @@ function initDb(): DatabaseSchema {
     const parsed = JSON.parse(raw);
 
     let users: User[] = parsed.users || [];
-    const existingAdminIdx = users.findIndex(
-      (u: User) => u.email.toLowerCase() === adminEmail || u.email.toLowerCase() === 'tonollibrenno@gmail.com'
-    );
+    if (adminEmail && adminPass) {
+      const existingAdminIdx = users.findIndex(
+        (u: User) => u.email.toLowerCase() === adminEmail
+      );
 
-    if (existingAdminIdx >= 0) {
-      users[existingAdminIdx] = {
-        ...users[existingAdminIdx],
-        role: 'admin',
-        passwordHash: hashPassword(adminPass),
-      };
-    } else {
-      users.push(adminUser);
+      if (existingAdminIdx >= 0) {
+        users[existingAdminIdx] = {
+          ...users[existingAdminIdx],
+          role: 'admin',
+          passwordHash: hashPassword(adminPass),
+        };
+      } else {
+        users.push({
+          id: 'user-admin-1',
+          email: adminEmail,
+          passwordHash: hashPassword(adminPass),
+          role: 'admin',
+          name: 'Mariana Leone Admin',
+        });
+      }
     }
 
     const merged: DatabaseSchema = {
@@ -149,18 +160,21 @@ class Store {
     const cleanEmail = (email || '').trim().toLowerCase();
     let user = this.data.users.find((u) => u.email.toLowerCase() === cleanEmail);
     
-    const adminEmail = (process.env.ADMIN_EMAIL || 'tonollibrenno@gmail.com').toLowerCase();
+    const adminEmail = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+    const adminPass = process.env.ADMIN_PASSWORD || '';
     
-    if (cleanEmail === 'tonollibrenno@gmail.com' || cleanEmail === adminEmail) {
+    if (adminEmail && cleanEmail === adminEmail) {
       if (!user) {
-        user = {
-          id: 'user-admin-1',
-          email: cleanEmail,
-          passwordHash: hashPassword(process.env.ADMIN_PASSWORD || 'admin123'),
-          role: 'admin',
-          name: 'Mariana Leone Admin',
-        };
-        this.data.users.push(user);
+        if (adminPass) {
+          user = {
+            id: 'user-admin-1',
+            email: cleanEmail,
+            passwordHash: hashPassword(adminPass),
+            role: 'admin',
+            name: 'Mariana Leone Admin',
+          };
+          this.data.users.push(user);
+        }
       } else {
         user.role = 'admin';
       }
@@ -181,7 +195,7 @@ class Store {
   addService(service: Omit<ServiceItem, 'id'>): ServiceItem {
     const newService: ServiceItem = {
       ...service,
-      id: 'srv-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+      id: 'srv-' + Date.now() + '-' + crypto.randomInt(100, 1000),
     };
     this.data.services.push(newService);
     this.save();
@@ -253,7 +267,7 @@ class Store {
 
     const newBooking: BookingData = {
       ...bookingData,
-      id: 'BK-' + Math.floor(1000 + Math.random() * 9000),
+      id: 'BK-' + crypto.randomInt(1000, 10000),
       status: 'pending',
       createdAt: new Date().toLocaleDateString('pt-BR'),
     };

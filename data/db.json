@@ -1,13 +1,5 @@
 {
-  "users": [
-    {
-      "id": "user-admin-1",
-      "email": "tonollibrenno@gmail.com",
-      "passwordHash": "00e4d3e440ea6189ce9b7e6d636b75d8b3b1904d23e83612e2124b736a10ee12",
-      "role": "admin",
-      "name": "Mari Nail Admin"
-    }
-  ],
+  "users": [],
   "services": [
     {
       "id": "alongamento-fibra",

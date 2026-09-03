@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
+import crypto from 'node:crypto';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -10,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = 3000;
-const JWT_SECRET = process.env.JWT_SECRET || 'mari_nail_designer_jwt_secret_2026';
+const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
 
 // Middleware
 app.use(express.json({ limit: '50mb' }));
@@ -84,14 +85,14 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
 
     let user = dbStore.getUserByEmail(cleanEmail);
 
-    const defaultAdminEmail = (process.env.ADMIN_EMAIL || 'tonollibrenno@gmail.com').toLowerCase();
-    const defaultAdminPass = process.env.ADMIN_PASSWORD || 'admin123';
+    const defaultAdminEmail = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+    const defaultAdminPass = process.env.ADMIN_PASSWORD || '';
 
-    if (cleanEmail === defaultAdminEmail || cleanEmail === 'tonollibrenno@gmail.com') {
+    if (defaultAdminEmail && cleanEmail === defaultAdminEmail) {
       const inputHash = hashPassword(cleanPass);
-      const expectedHash = hashPassword(defaultAdminPass);
+      const expectedHash = defaultAdminPass ? hashPassword(defaultAdminPass) : '';
 
-      if (cleanPass === defaultAdminPass || inputHash === expectedHash || (user && inputHash === user.passwordHash)) {
+      if ((defaultAdminPass && cleanPass === defaultAdminPass) || (expectedHash && inputHash === expectedHash) || (user && inputHash === user.passwordHash)) {
         const payload: AuthUser = {
           id: user?.id || 'user-admin-1',
           email: cleanEmail,
