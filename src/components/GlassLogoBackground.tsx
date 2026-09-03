@@ -7,7 +7,7 @@ export const GlassLogoBackground: React.FC = () => {
   return (
     <div 
       aria-hidden="true" 
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none flex items-center justify-center will-change-transform transform-gpu"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none flex items-center justify-center will-change-transform transform-gpu w-full max-w-full"
     >
       {/* 1. Central Radiant Aura Glow */}
       <motion.div

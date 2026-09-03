@@ -75,7 +75,7 @@ function MainContent() {
 
   // Public Website View
   return (
-    <div className="relative min-h-screen bg-[#FCFAF7] text-[#593E30] font-sans flex flex-col selection:bg-[#FFD700]/30 selection:text-[#B37E00]">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-hidden bg-[#FCFAF7] text-[#593E30] font-sans flex flex-col selection:bg-[#FFD700]/30 selection:text-[#B37E00]">
       {/* Glassmorphic Animated Golden Logo Background */}
       <GlassLogoBackground />
 
@@ -83,7 +83,7 @@ function MainContent() {
       <Header />
 
       {/* Main Content Sections */}
-      <main className="relative z-10 flex-1">
+      <main className="relative z-10 flex-1 w-full max-w-full overflow-x-hidden">
         <Hero />
         <Highlights />
         <About />
@@ -98,7 +98,7 @@ function MainContent() {
       </main>
 
       {/* Footer */}
-      <div className="relative z-10">
+      <div className="relative z-10 w-full max-w-full overflow-x-hidden">
         <Footer />
       </div>
 

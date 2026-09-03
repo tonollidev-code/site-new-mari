@@ -30,30 +30,30 @@ export const StudioConfigManager: React.FC = () => {
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-[#E5C158]/40 shadow-[0_10px_25px_rgba(44,24,16,0.04)] max-w-2xl mx-auto space-y-6">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-2xl bg-[#F8F5F2] border border-[#E5C158]/40 flex items-center justify-center text-[#C5A059] shadow-xs">
-          <Settings className="w-5 h-5" />
+    <div className="bg-white/95 p-4 sm:p-6 rounded-2xl border border-[#DFD7CD] shadow-2xs max-w-2xl mx-auto space-y-4 sm:space-y-5">
+      <div className="flex items-center gap-2.5">
+        <div className="w-8 h-8 rounded-xl bg-[#FAF7F3] border border-[#DFD7CD] flex items-center justify-center text-[#C5A059]">
+          <Settings className="w-4 h-4" />
         </div>
         <div>
-          <h3 className="font-serif font-bold text-lg text-[#523626]">Configurações do Estúdio</h3>
+          <h2 className="font-serif font-bold text-base text-[#3F2519]">Configurações do Estúdio</h2>
           <p className="text-xs text-[#8C6E5D]">
-            Altere as informações de contato, WhatsApp, endereço e horário de funcionamento exibidos no site.
+            Altere informações de contato, WhatsApp, endereço e horários exibidos no site.
           </p>
         </div>
       </div>
 
       {savedSuccess && (
-        <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+        <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 animate-in fade-in">
           <Check className="w-4 h-4 text-emerald-600" />
           <span>Informações do estúdio salvas com sucesso!</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[#523626] mb-1">
+            <label className="flex items-center gap-1.5 text-[11px] font-semibold text-[#523626] mb-1">
               <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
               <span>Número do WhatsApp (Com DDI) *</span>
             </label>
@@ -63,12 +63,12 @@ export const StudioConfigManager: React.FC = () => {
               value={whatsappNumber}
               onChange={(e) => setWhatsappNumber(e.target.value)}
               placeholder="5511995866952"
-              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
+              className="w-full p-2.5 rounded-xl border border-[#DFD7CD] text-xs text-[#3D2314] bg-[#FAF7F3] focus:bg-white focus:border-[#3D2314] outline-none"
             />
           </div>
 
           <div>
-            <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[#523626] mb-1">
+            <label className="flex items-center gap-1.5 text-[11px] font-semibold text-[#523626] mb-1">
               <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
               <span>Exibição do WhatsApp *</span>
             </label>
@@ -78,14 +78,14 @@ export const StudioConfigManager: React.FC = () => {
               value={whatsappDisplay}
               onChange={(e) => setWhatsappDisplay(e.target.value)}
               placeholder="(11) 99586-6952"
-              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
+              className="w-full p-2.5 rounded-xl border border-[#DFD7CD] text-xs text-[#3D2314] bg-[#FAF7F3] focus:bg-white focus:border-[#3D2314] outline-none"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[#523626] mb-1">
+            <label className="flex items-center gap-1.5 text-[11px] font-semibold text-[#523626] mb-1">
               <Instagram className="w-3.5 h-3.5 text-[#C5A059]" />
               <span>Instagram @ *</span>
             </label>
@@ -95,12 +95,12 @@ export const StudioConfigManager: React.FC = () => {
               value={instagramHandle}
               onChange={(e) => setInstagramHandle(e.target.value)}
               placeholder="@leonesnail"
-              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
+              className="w-full p-2.5 rounded-xl border border-[#DFD7CD] text-xs text-[#3D2314] bg-[#FAF7F3] focus:bg-white focus:border-[#3D2314] outline-none"
             />
           </div>
 
           <div>
-            <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[#523626] mb-1">
+            <label className="flex items-center gap-1.5 text-[11px] font-semibold text-[#523626] mb-1">
               <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
               <span>Texto dos Horários de Funcionamento</span>
             </label>
@@ -110,13 +110,13 @@ export const StudioConfigManager: React.FC = () => {
               value={operatingHours}
               onChange={(e) => setOperatingHours(e.target.value)}
               placeholder="Terça a Sábado: 09h às 19h"
-              className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
+              className="w-full p-2.5 rounded-xl border border-[#DFD7CD] text-xs text-[#3D2314] bg-[#FAF7F3] focus:bg-white focus:border-[#3D2314] outline-none"
             />
           </div>
         </div>
 
         <div>
-          <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[#523626] mb-1">
+          <label className="flex items-center gap-1.5 text-[11px] font-semibold text-[#523626] mb-1">
             <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
             <span>Endereço Completo do Estúdio *</span>
           </label>
@@ -126,12 +126,12 @@ export const StudioConfigManager: React.FC = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Rua São Vicente das Minas, 47"
-            className="w-full p-3 rounded-2xl border border-[#EADEDA] text-sm text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
+            className="w-full p-2.5 rounded-xl border border-[#DFD7CD] text-xs text-[#3D2314] bg-[#FAF7F3] focus:bg-white focus:border-[#3D2314] outline-none"
           />
         </div>
 
         <div>
-          <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[#523626] mb-1">
+          <label className="flex items-center gap-1.5 text-[11px] font-semibold text-[#523626] mb-1">
             <Map className="w-3.5 h-3.5 text-[#C5A059]" />
             <span>URL de Embed do Google Maps</span>
           </label>
@@ -140,16 +140,16 @@ export const StudioConfigManager: React.FC = () => {
             value={googleMapsEmbedUrl}
             onChange={(e) => setGoogleMapsEmbedUrl(e.target.value)}
             placeholder="https://maps.google.com/..."
-            className="w-full p-3 rounded-2xl border border-[#EADEDA] text-xs text-[#523626] bg-white/95 focus:border-[#E5C158] focus:ring-1 focus:ring-[#E5C158] outline-none"
+            className="w-full p-2.5 rounded-xl border border-[#DFD7CD] text-xs text-[#3D2314] bg-[#FAF7F3] focus:bg-white focus:border-[#3D2314] outline-none"
           />
         </div>
 
-        <div className="pt-4 flex justify-end">
+        <div className="pt-2 flex justify-end">
           <button
             type="submit"
-            className="bg-gradient-to-r from-[#E5C158] via-[#FFD700] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] px-8 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs shadow-md shadow-[#E5C158]/20 hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto bg-[#3F2519] hover:bg-[#2C1810] text-[#F5EFEB] px-5 py-2.5 rounded-xl font-semibold text-xs shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer"
           >
-            <Save className="w-4 h-4 text-[#3D2314]" />
+            <Save className="w-4 h-4 text-[#E5C158]" />
             <span>Salvar Informações</span>
           </button>
         </div>

@@ -243,78 +243,79 @@ export const ServicesManager: React.FC = () => {
         </div>
       )}
 
-      {/* Header action */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/90 backdrop-blur-md p-5 rounded-3xl border border-[#E5C158]/40 shadow-[0_10px_25px_rgba(44,24,16,0.04)]">
+      {/* Header action - Clean & Minimalist */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white/95 p-3.5 sm:p-5 rounded-2xl border border-[#DFD7CD] shadow-2xs">
         <div>
-          <h3 className="font-serif font-bold text-lg text-[#523626]">Gerenciamento de Serviços & Fotos</h3>
+          <h2 className="font-serif font-bold text-base sm:text-lg text-[#3F2519]">Catálogo de Serviços</h2>
           <p className="text-xs text-[#8C6E5D]">
-            Adicione, altere fotos de capa, edite valores ou remova procedimentos do catálogo.
+            Gerencie procedimentos, fotos de capa, valores e durações.
           </p>
         </div>
         <button
           onClick={openAddModal}
-          className="bg-gradient-to-r from-[#E5C158] via-[#FFD700] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-md shadow-[#E5C158]/20 flex items-center gap-2 transition-transform transform hover:-translate-y-0.5 cursor-pointer self-stretch sm:self-auto justify-center"
+          className="bg-[#3F2519] hover:bg-[#2C1810] text-[#F5EFEB] px-4 py-2 rounded-xl text-xs font-semibold shadow-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer w-full sm:w-auto"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 text-[#E5C158]" />
           <span>Novo Serviço</span>
         </button>
       </div>
 
-      {/* Services Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Services Grid - Compact on Mobile */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
         {services.map((service) => (
           <div
             key={service.id}
-            className="bg-white/95 backdrop-blur-md rounded-3xl border border-[#E5C158]/35 shadow-md overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-[#E5C158]/60 transition-all"
+            className="bg-white/95 rounded-2xl border border-[#DFD7CD] shadow-2xs hover:shadow-xs transition-all overflow-hidden flex flex-col justify-between"
           >
             <div>
               {/* Image Banner */}
               {service.image ? (
-                <div className="h-48 w-full overflow-hidden relative bg-[#F8F5F2]">
+                <div className="h-40 w-full overflow-hidden relative bg-[#FAF7F3]">
                   <img
                     src={service.image}
                     alt={service.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   {service.popular && (
-                    <span className="absolute top-3 left-3 bg-[#E5C158] text-[#3D2314] text-[10px] font-bold uppercase px-3 py-1 rounded-full shadow-sm border border-white/50">
+                    <span className="absolute top-2.5 left-2.5 bg-[#3F2519] text-[#E5C158] text-[9px] font-bold uppercase px-2 py-0.5 rounded-md border border-[#E5C158]/40 shadow-xs">
                       Destaque
                     </span>
                   )}
                   <button
                     onClick={() => openEditModal(service)}
-                    className="absolute top-3 right-3 bg-white/90 hover:bg-white text-[#523626] p-1.5 rounded-full shadow-xs backdrop-blur-xs transition-transform hover:scale-105 cursor-pointer"
+                    className="absolute top-2.5 right-2.5 bg-white/90 hover:bg-white text-[#3D2314] p-1.5 rounded-lg shadow-2xs cursor-pointer"
                     title="Trocar Foto"
                   >
                     <Edit3 className="w-3.5 h-3.5 text-[#C5A059]" />
                   </button>
                 </div>
               ) : (
-                <div className="h-32 bg-[#F8F5F2]/80 flex flex-col items-center justify-center text-[#C5A059] relative gap-1">
-                  <Sparkles className="w-7 h-7 opacity-40" />
-                  <span className="text-[10px] text-[#A38675] font-medium">Sem imagem de capa</span>
+                <div className="h-28 bg-[#FAF7F3] flex flex-col items-center justify-center text-[#C5A059] relative gap-1">
+                  <Sparkles className="w-5 h-5 opacity-40" />
+                  <span className="text-[10px] text-[#8C6E5D]">Sem foto de capa</span>
                 </div>
               )}
 
               {/* Details */}
-              <div className="p-5 space-y-3">
+              <div className="p-3.5 sm:p-4 space-y-2">
                 <div className="flex items-start justify-between gap-2">
-                  <h4 className="font-serif font-bold text-base text-[#523626] leading-tight">{service.name}</h4>
-                  <span className="text-[10px] font-bold text-[#8C6E5D] uppercase bg-[#F8F5F2] px-2.5 py-0.5 rounded-full border border-[#E5C158]/30 shrink-0">
+                  <h3 className="font-serif font-bold text-sm sm:text-base text-[#3F2519] leading-snug">{service.name}</h3>
+                  <span className="text-[9px] font-semibold text-[#8C6E5D] uppercase bg-[#FAF7F3] px-2 py-0.5 rounded border border-[#DFD7CD] shrink-0">
                     {service.category}
                   </span>
                 </div>
 
-                <p className="text-xs text-[#8C6E5D] leading-relaxed line-clamp-2">
+                <p className="text-[11px] text-[#8C6E5D] leading-relaxed line-clamp-2">
                   {service.description}
                 </p>
 
-                <div className="flex items-center justify-between text-xs pt-3 border-t border-[#EADEDA]/60">
-                  <div className="flex items-center gap-1.5 text-[#523626] font-medium">
-                    <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>{service.duration}</span>
+                <div className="flex items-center justify-between text-xs pt-2.5 border-t border-[#EADEDA]/70">
+                  <div className="flex items-center gap-1 text-[#6E5343]">
+                    <Clock className="w-3 h-3 text-[#C5A059]" />
+                    <span className="text-[11px]">{service.duration}</span>
                   </div>
-                  <div className="font-bold text-[#C5A059] text-sm">
+                  <div className="font-bold text-[#C5A059] text-xs sm:text-sm">
                     {service.price}
                   </div>
                 </div>
@@ -322,19 +323,19 @@ export const ServicesManager: React.FC = () => {
             </div>
 
             {/* Actions */}
-            <div className="p-4 bg-[#F8F5F2]/80 border-t border-[#EADEDA]/60 flex items-center justify-end gap-2">
+            <div className="p-2.5 sm:p-3 bg-[#FAF7F3] border-t border-[#DFD7CD]/70 flex items-center justify-end gap-2">
               <button
                 onClick={() => openEditModal(service)}
-                className="bg-white hover:bg-[#EADEDA] text-[#523626] border border-[#EADEDA] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                className="bg-white hover:bg-[#F0EBE4] text-[#3D2314] border border-[#DFD7CD] px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1 cursor-pointer"
               >
-                <Edit3 className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Editar / Trocar Foto</span>
+                <Edit3 className="w-3 h-3 text-[#C5A059]" />
+                <span>Editar</span>
               </button>
               <button
                 onClick={() => setDeleteConfirmId(service.id)}
-                className="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                className="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200/80 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1 cursor-pointer"
               >
-                <Trash2 className="w-3.5 h-3.5" />
+                <Trash2 className="w-3 h-3" />
                 <span>Excluir</span>
               </button>
             </div>

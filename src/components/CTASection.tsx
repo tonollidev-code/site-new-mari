@@ -7,10 +7,10 @@ export const CTASection: React.FC = () => {
   const { scrollToSection } = useApp();
 
   return (
-    <section className="py-20 lg:py-24 bg-[#3F2519] text-[#FCFAF7] relative overflow-hidden border-t border-[#DFD7CD]/20">
+    <section className="py-20 lg:py-24 bg-[#3F2519] text-[#FCFAF7] relative overflow-hidden border-t border-[#DFD7CD]/20 w-full max-w-full">
       
       {/* Subtle ambient radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[500px] md:w-[600px] h-[280px] sm:h-[500px] md:h-[600px] bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none max-w-full" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         
