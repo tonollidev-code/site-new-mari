@@ -31,26 +31,26 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#2C1810] leading-[1.12] mb-6 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#3F2519] leading-[1.12] mb-6 tracking-tight">
               Suas unhas merecem um <br className="hidden sm:inline" />
               <span className="font-serif italic font-normal text-[#C5A059]">toque de elegância.</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl font-serif italic text-[#735747] mb-4 font-normal">
+            <p className="text-lg sm:text-xl font-serif italic text-[#7A5E4F] mb-4 font-normal">
               Realce sua beleza com unhas feitas especialmente para você.
             </p>
 
             {/* Short Description */}
-            <p className="text-base text-[#6E5648] max-w-xl mb-8 leading-relaxed font-normal">
-              Na <strong className="text-[#2C1810] font-semibold">Mariana Leone</strong>, cada detalhe é pensado para proporcionar uma experiência única, sofisticada e personalizada em um ambiente acolhedor.
+            <p className="text-base text-[#73594A] max-w-xl mb-8 leading-relaxed font-normal">
+              Na <strong className="text-[#3F2519] font-semibold">Mariana Leone</strong>, cada detalhe é pensado para proporcionar uma experiência única, sofisticada e personalizada em um ambiente acolhedor.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-4">
               <button
                 onClick={() => scrollToSection('booking')}
-                className="group relative bg-[#2C1810] hover:bg-[#3D2314] text-[#FCFAF7] px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 border border-[#2C1810]"
+                className="group relative bg-[#482D1F] hover:bg-[#3D2418] text-[#FCFAF7] px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 border border-[#482D1F]"
               >
                 <Calendar className="w-4 h-4 text-[#C5A059]" />
                 <span>Agendar Meu Horário</span>
@@ -58,7 +58,7 @@ export const Hero: React.FC = () => {
 
               <button
                 onClick={() => scrollToSection('gallery')}
-                className="bg-white hover:bg-[#F5EFEB] text-[#2C1810] border border-[#DFD7CD] hover:border-[#C5A059]/60 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs shadow-xs hover:shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3"
+                className="bg-white hover:bg-[#F5EFEB] text-[#482D1F] border border-[#DFD7CD] hover:border-[#C5A059]/60 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs shadow-xs hover:shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3"
               >
                 <Eye className="w-4 h-4 text-[#C5A059]" />
                 <span>Ver Meus Trabalhos</span>
@@ -93,7 +93,7 @@ export const Hero: React.FC = () => {
                   {/* Refined Glassmorphism Badge Overlay */}
                   <div className="absolute bottom-4 left-4 right-4 sm:left-5 sm:right-5 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-[#E5C158]/40 shadow-sm flex items-center justify-center gap-2 transition-all">
                     <Sparkles className="w-3.5 h-3.5 text-[#C5A059] shrink-0 opacity-90" />
-                    <span className="font-delicate italic text-sm sm:text-base md:text-lg font-normal text-[#2C1810] tracking-wide">
+                    <span className="font-delicate italic text-sm sm:text-base md:text-lg font-normal text-[#3F2519] tracking-wide">
                       Unhas em gel com durabilidade
                     </span>
                   </div>

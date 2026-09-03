@@ -127,7 +127,7 @@ export const Header: React.FC = () => {
             <button
               id="header-booking-btn"
               onClick={() => handleNavClick('booking')}
-              className="bg-gradient-to-r from-[#E5C158] via-[#F5E5C9] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] px-5 lg:px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-md hover:shadow-lg shadow-[#E5C158]/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 cursor-pointer"
+              className="bg-gradient-to-r from-[#E5C158] via-[#F5E5C9] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#4A2E1F] px-5 lg:px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-md hover:shadow-lg shadow-[#E5C158]/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 cursor-pointer"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Agendar Horário</span>
@@ -138,21 +138,21 @@ export const Header: React.FC = () => {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => handleNavClick('booking')}
-              className="bg-gradient-to-r from-[#E5C158] to-[#C5A059] text-[#3D2314] px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95 transition-transform"
+              className="bg-gradient-to-r from-[#E5C158] to-[#C5A059] text-[#4A2E1F] px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95 transition-transform"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Agendar</span>
             </button>
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#FAF6F0] hover:bg-[#F0EAE1] active:bg-[#EADEDA] border border-[#E5C158]/50 text-[#3D2314] flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#FAF6F0] hover:bg-[#F0EAE1] active:bg-[#EADEDA] border border-[#E5C158]/50 text-[#4A2E1F] flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
               aria-label={mobileMenuOpen ? "Fechar Menu" : "Abrir Menu Principal"}
               title="Menu"
             >
               {mobileMenuOpen ? (
-                <X className="w-6 h-6 text-[#3D2314]" />
+                <X className="w-6 h-6 text-[#4A2E1F]" />
               ) : (
-                <Menu className="w-6 h-6 text-[#3D2314]" />
+                <Menu className="w-6 h-6 text-[#4A2E1F]" />
               )}
             </button>
           </div>
@@ -162,7 +162,7 @@ export const Header: React.FC = () => {
       {/* Mobile Slide-Over Drawer (Rendered outside header to avoid backdrop-filter stacking trapping) */}
       {mobileMenuOpen && (
         <div 
-          className="md:hidden fixed inset-0 z-[100] bg-[#22120B]/60 backdrop-blur-xs flex justify-end animate-in fade-in duration-200"
+          className="md:hidden fixed inset-0 z-[100] bg-[#3D251A]/40 backdrop-blur-xs flex justify-end animate-in fade-in duration-200"
           onClick={() => setMobileMenuOpen(false)}
         >
           <div 
@@ -179,7 +179,7 @@ export const Header: React.FC = () => {
                     className="w-10 h-10 rounded-full object-cover border border-[#E5C158] shadow-2xs"
                   />
                   <div className="flex flex-col">
-                    <span className="font-serif font-bold text-base text-[#523626] leading-tight">
+                    <span className="font-serif font-bold text-base text-[#4A2E1F] leading-tight">
                       Mariana <span className="text-[#C5A059]">Leone</span>
                     </span>
                     <span className="text-[9px] tracking-[0.25em] text-[#A38675] uppercase font-sans font-medium">
@@ -189,10 +189,10 @@ export const Header: React.FC = () => {
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-10 h-10 rounded-full bg-[#FAF6F0] hover:bg-gray-100 flex items-center justify-center text-[#3D2314] cursor-pointer transition-colors border border-[#EADEDA]"
+                  className="w-10 h-10 rounded-full bg-[#FAF6F0] hover:bg-gray-100 flex items-center justify-center text-[#4A2E1F] cursor-pointer transition-colors border border-[#EADEDA]"
                   aria-label="Fechar Menu"
                 >
-                  <X className="w-5 h-5 text-[#3D2314]" />
+                  <X className="w-5 h-5 text-[#4A2E1F]" />
                 </button>
               </div>
 
@@ -201,7 +201,7 @@ export const Header: React.FC = () => {
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
-                    className="text-left py-3.5 px-4 rounded-2xl hover:bg-[#F8F5F2] active:bg-[#EADEDA] text-xs font-bold uppercase tracking-wider text-[#523626] flex items-center justify-between hover:text-[#C5A059] transition-all cursor-pointer border border-transparent hover:border-[#E5C158]/20"
+                    className="text-left py-3.5 px-4 rounded-2xl hover:bg-[#F8F5F2] active:bg-[#EADEDA] text-xs font-bold uppercase tracking-wider text-[#4A2E1F] flex items-center justify-between hover:text-[#C5A059] transition-all cursor-pointer border border-transparent hover:border-[#E5C158]/20"
                   >
                     <span>{item.label}</span>
                     <Sparkles className="w-3.5 h-3.5 text-[#E5C158]" />
@@ -213,7 +213,7 @@ export const Header: React.FC = () => {
             <div className="pt-6 border-t border-[#EADEDA] flex flex-col gap-3">
               <button
                 onClick={() => handleNavClick('booking')}
-                className="w-full bg-gradient-to-r from-[#E5C158] via-[#FFD700] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] py-3.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98 transition-transform"
+                className="w-full bg-gradient-to-r from-[#E5C158] via-[#FFD700] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#4A2E1F] py-3.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98 transition-transform"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Agendar Meu Horário</span>

@@ -39,10 +39,10 @@ export const Services: React.FC = () => {
           <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#8C6E5D] bg-white px-3.5 py-1 rounded-full border border-[#DFD7CD] shadow-xs">
             Procedimentos Exclusivos
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mt-4 mb-3 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#3F2519] mt-4 mb-3 tracking-tight">
             Menu de Serviços
           </h2>
-          <p className="text-base text-[#735747] font-serif italic font-normal">
+          <p className="text-base text-[#7A5E4F] font-serif italic font-normal">
             Escolha o cuidado perfeito para realçar a beleza e a saúde das suas unhas.
           </p>
         </motion.div>
@@ -63,7 +63,7 @@ export const Services: React.FC = () => {
               }`}
             >
               {service.popular && (
-                <div className="absolute -top-3 right-6 bg-[#2C1810] text-[#F5EFEB] text-[10px] font-bold uppercase tracking-widest px-3.5 py-1 rounded-full shadow-sm flex items-center gap-1.5 border border-[#C5A059]/40">
+                <div className="absolute -top-3 right-6 bg-[#482D1F] text-[#F5EFEB] text-[10px] font-bold uppercase tracking-widest px-3.5 py-1 rounded-full shadow-sm flex items-center gap-1.5 border border-[#C5A059]/40">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
                   <span>Mais Pedido</span>
                 </div>
@@ -91,11 +91,11 @@ export const Services: React.FC = () => {
                 )}
 
                 {/* Service Info */}
-                <h3 className="text-xl font-serif font-bold text-[#2C1810] mb-2 group-hover:text-[#C5A059] transition-colors">
+                <h3 className="text-xl font-serif font-bold text-[#3F2519] mb-2 group-hover:text-[#C5A059] transition-colors">
                   {service.name}
                 </h3>
 
-                <p className="text-xs text-[#6E5648] leading-relaxed mb-6 min-h-[40px] font-normal">
+                <p className="text-xs text-[#73594A] leading-relaxed mb-6 min-h-[40px] font-normal">
                   {service.description}
                 </p>
               </div>
@@ -119,7 +119,7 @@ export const Services: React.FC = () => {
                 {/* Booking Button */}
                 <button
                   onClick={() => handleSelectService(service)}
-                  className="w-full bg-[#F8F5F2] group-hover:bg-[#2C1810] text-[#2C1810] group-hover:text-[#FCFAF7] border border-[#DFD7CD] group-hover:border-[#2C1810] py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 transform active:scale-98 shadow-xs cursor-pointer"
+                  className="w-full bg-[#F8F5F2] group-hover:bg-[#482D1F] text-[#482D1F] group-hover:text-[#FCFAF7] border border-[#DFD7CD] group-hover:border-[#482D1F] py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 transform active:scale-98 shadow-xs cursor-pointer"
                 >
                   <Calendar className="w-3.5 h-3.5 text-[#C5A059] group-hover:text-[#C5A059] transition-colors" />
                   <span>Agendar Este Serviço</span>

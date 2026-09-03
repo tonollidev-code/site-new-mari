@@ -26,10 +26,10 @@ export const FAQSection: React.FC = () => {
           <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#8C6E5D] bg-white px-3.5 py-1 rounded-full border border-[#DFD7CD] shadow-xs">
             Tire suas Dúvidas
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mt-4 mb-3 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#3F2519] mt-4 mb-3 tracking-tight">
             Perguntas Frequentes
           </h2>
-          <p className="text-base text-[#735747] font-serif italic font-normal">
+          <p className="text-base text-[#7A5E4F] font-serif italic font-normal">
             Tudo o que você precisa saber sobre nossos procedimentos e atendimentos.
           </p>
         </motion.div>
@@ -49,7 +49,7 @@ export const FAQSection: React.FC = () => {
               >
                 <button
                   onClick={() => toggleAccordion(faq.id)}
-                  className="w-full px-6 py-5 text-left font-serif font-bold text-base sm:text-lg text-[#2C1810] flex items-center justify-between gap-4 hover:text-[#C5A059] transition-colors cursor-pointer"
+                  className="w-full px-6 py-5 text-left font-serif font-bold text-base sm:text-lg text-[#3F2519] flex items-center justify-between gap-4 hover:text-[#C5A059] transition-colors cursor-pointer"
                 >
                   <span className="flex items-center gap-3">
                     <HelpCircle className="w-4 h-4 text-[#C5A059] shrink-0" />
@@ -71,7 +71,7 @@ export const FAQSection: React.FC = () => {
                       transition={{ duration: 0.28, ease: 'easeOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 text-xs sm:text-sm text-[#6E5648] leading-relaxed border-t border-[#F8F5F2] pt-4 font-normal">
+                      <div className="px-6 pb-6 text-xs sm:text-sm text-[#73594A] leading-relaxed border-t border-[#F8F5F2] pt-4 font-normal">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -91,10 +91,10 @@ export const FAQSection: React.FC = () => {
           className="mt-12 bg-white p-6 sm:p-7 rounded-3xl border border-[#DFD7CD] shadow-luxury flex flex-col sm:flex-row items-center justify-between gap-5"
         >
           <div className="text-left">
-            <h4 className="font-serif font-bold text-[#2C1810] text-base">
+            <h4 className="font-serif font-bold text-[#3F2519] text-base">
               Ainda ficou com alguma dúvida?
             </h4>
-            <p className="text-xs text-[#6E5648] mt-1 font-normal">
+            <p className="text-xs text-[#73594A] mt-1 font-normal">
               Fale diretamente com a Mari pelo WhatsApp. Estamos à disposição!
             </p>
           </div>

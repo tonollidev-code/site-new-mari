@@ -47,7 +47,7 @@ export const Highlights: React.FC = () => {
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-10 h-10 rounded-xl bg-white border border-[#DFD7CD] text-[#C5A059] group-hover:bg-[#2C1810] group-hover:text-[#F5EFEB] group-hover:border-[#2C1810] flex items-center justify-center transition-all duration-300">
+                    <div className="w-10 h-10 rounded-xl bg-white border border-[#DFD7CD] text-[#C5A059] group-hover:bg-[#482D1F] group-hover:text-[#F5EFEB] group-hover:border-[#482D1F] flex items-center justify-center transition-all duration-300">
                       <Icon className="w-4 h-4" />
                     </div>
                     <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#8C6E5D] bg-white px-2.5 py-0.5 rounded-full border border-[#DFD7CD]">
@@ -55,11 +55,11 @@ export const Highlights: React.FC = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-base font-serif font-bold text-[#2C1810] mb-2 group-hover:text-[#C5A059] transition-colors">
+                  <h3 className="text-base font-serif font-bold text-[#3F2519] mb-2 group-hover:text-[#C5A059] transition-colors">
                     {item.title}
                   </h3>
 
-                  <p className="text-xs text-[#6E5648] leading-relaxed font-normal">
+                  <p className="text-xs text-[#73594A] leading-relaxed font-normal">
                     {item.description}
                   </p>
                 </div>

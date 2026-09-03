@@ -43,10 +43,10 @@ export const Testimonials: React.FC = () => {
           <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#8C6E5D] bg-white px-3.5 py-1 rounded-full border border-[#DFD7CD] shadow-xs">
             Avaliações & Experiências
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mt-4 mb-3 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#3F2519] mt-4 mb-3 tracking-tight">
             O que dizem as clientes
           </h2>
-          <p className="text-base text-[#735747] font-serif italic font-normal">
+          <p className="text-base text-[#7A5E4F] font-serif italic font-normal">
             Depoimentos reais de quem já viveu a experiência Mari Nail Designer.
           </p>
         </motion.div>
@@ -79,13 +79,13 @@ export const Testimonials: React.FC = () => {
                   ))}
                 </div>
 
-                <p className="text-base sm:text-lg lg:text-xl font-serif italic text-[#2C1810] leading-relaxed mb-6 font-normal">
+                <p className="text-base sm:text-lg lg:text-xl font-serif italic text-[#3F2519] leading-relaxed mb-6 font-normal">
                   “{testimonials[currentIndex]?.comment}”
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-5 border-t border-[#EADEDA]/70">
                   <div>
-                    <h4 className="font-serif font-bold text-base sm:text-lg text-[#2C1810]">
+                    <h4 className="font-serif font-bold text-base sm:text-lg text-[#3F2519]">
                       {testimonials[currentIndex]?.name}
                     </h4>
                     <p className="text-xs text-[#8A6D56]">
@@ -125,7 +125,7 @@ export const Testimonials: React.FC = () => {
             <div className="flex items-center gap-2.5">
               <button
                 onClick={handlePrev}
-                className="p-2.5 rounded-full bg-white border border-[#DFD7CD] hover:border-[#C5A059] text-[#2C1810] hover:text-[#C5A059] transition-colors shadow-xs active:scale-95 cursor-pointer"
+                className="p-2.5 rounded-full bg-white border border-[#DFD7CD] hover:border-[#C5A059] text-[#482D1F] hover:text-[#C5A059] transition-colors shadow-xs active:scale-95 cursor-pointer"
                 aria-label="Depoimento Anterior"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -133,7 +133,7 @@ export const Testimonials: React.FC = () => {
 
               <button
                 onClick={handleNext}
-                className="p-2.5 rounded-full bg-white border border-[#DFD7CD] hover:border-[#C5A059] text-[#2C1810] hover:text-[#C5A059] transition-colors shadow-xs active:scale-95 cursor-pointer"
+                className="p-2.5 rounded-full bg-white border border-[#DFD7CD] hover:border-[#C5A059] text-[#482D1F] hover:text-[#C5A059] transition-colors shadow-xs active:scale-95 cursor-pointer"
                 aria-label="Próximo Depoimento"
               >
                 <ChevronRight className="w-4 h-4" />

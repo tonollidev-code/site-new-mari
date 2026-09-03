@@ -21,7 +21,7 @@ export const Gallery: React.FC = () => {
           <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#8C6E5D] bg-white px-3.5 py-1 rounded-full border border-[#DFD7CD] shadow-xs">
             Portfólio & Nail Art
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mt-4 mb-3 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#3F2519] mt-4 mb-3 tracking-tight">
             Galeria de Trabalhos
           </h2>
         </motion.div>
@@ -48,8 +48,8 @@ export const Gallery: React.FC = () => {
                 />
 
                 {/* Refined Subtle Hover Zoom Overlay */}
-                <div className="absolute inset-0 bg-[#2C1810]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                  <div className="p-3.5 rounded-full bg-white/95 text-[#2C1810] shadow-md group-hover:scale-105 transition-transform duration-300 border border-[#E5C158]/30">
+                <div className="absolute inset-0 bg-[#3F2519]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                  <div className="p-3.5 rounded-full bg-white/95 text-[#3F2519] shadow-md group-hover:scale-105 transition-transform duration-300 border border-[#E5C158]/30">
                     <Maximize2 className="w-4 h-4 text-[#C5A059]" />
                   </div>
                 </div>
@@ -68,7 +68,7 @@ export const Gallery: React.FC = () => {
         >
           <button
             onClick={() => scrollToSection('booking')}
-            className="text-xs font-bold uppercase tracking-[0.18em] text-[#2C1810] hover:text-[#C5A059] transition-colors flex items-center justify-center gap-2 w-full cursor-pointer"
+            className="text-xs font-bold uppercase tracking-[0.18em] text-[#3F2519] hover:text-[#C5A059] transition-colors flex items-center justify-center gap-2 w-full cursor-pointer"
           >
             <span>Agendar Horário</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#C5A059]" />

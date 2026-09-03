@@ -21,10 +21,10 @@ export const LocationSection: React.FC = () => {
           <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#C5A059] bg-[#F8F5F2] px-3.5 py-1 rounded-full border border-[#E5C158]/35 shadow-xs">
             Venha nos Visitar
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mt-4 mb-3 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#3F2519] mt-4 mb-3 tracking-tight">
             Onde estamos
           </h2>
-          <p className="text-base text-[#7A6354] font-serif italic font-normal">
+          <p className="text-base text-[#7A5E4F] font-serif italic font-normal">
             Nosso estúdio está localizado em uma região acolhedora e de fácil acesso.
           </p>
         </motion.div>
@@ -46,7 +46,7 @@ export const LocationSection: React.FC = () => {
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-serif font-bold text-[#2C1810] text-base mb-1">Endereço do Estúdio</h4>
+                <h4 className="font-serif font-bold text-[#3F2519] text-base mb-1">Endereço do Estúdio</h4>
                 <p className="text-xs text-[#5C4538] leading-relaxed font-normal">{config.address}</p>
                 <a
                   href={`https://maps.google.com/?q=${encodeURIComponent(config.address)}`}
@@ -65,7 +65,7 @@ export const LocationSection: React.FC = () => {
                 <Clock className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-serif font-bold text-[#2C1810] text-base mb-1">Horário de Atendimento</h4>
+                <h4 className="font-serif font-bold text-[#3F2519] text-base mb-1">Horário de Atendimento</h4>
                 <p className="text-xs text-[#5C4538] leading-relaxed font-normal">{config.operatingHours}</p>
                 <p className="text-[11px] text-[#C5A059] font-semibold mt-1">Atendimento estritamente agendado</p>
               </div>
@@ -76,7 +76,7 @@ export const LocationSection: React.FC = () => {
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-serif font-bold text-[#2C1810] text-base mb-1">WhatsApp Oficial</h4>
+                <h4 className="font-serif font-bold text-[#3F2519] text-base mb-1">WhatsApp Oficial</h4>
                 <p className="text-xs text-[#5C4538] leading-relaxed font-normal">{config.whatsappDisplay}</p>
               </div>
             </div>
@@ -86,14 +86,14 @@ export const LocationSection: React.FC = () => {
                 <Instagram className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-serif font-bold text-[#2C1810] text-base mb-1">Instagram</h4>
+                <h4 className="font-serif font-bold text-[#3F2519] text-base mb-1">Instagram</h4>
                 <p className="text-xs text-[#5C4538] leading-relaxed font-normal">{config.instagramHandle}</p>
               </div>
             </div>
 
             <button
               onClick={() => scrollToSection('booking')}
-              className="w-full bg-gradient-to-r from-[#E5C158] via-[#F5E5C9] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#3D2314] py-3.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full bg-gradient-to-r from-[#E5C158] via-[#F5E5C9] to-[#C5A059] hover:from-[#C5A059] hover:to-[#E5C158] text-[#4A2E1F] py-3.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer"
             >
               <Calendar className="w-4 h-4" />
               <span>Agendar Minha Visita</span>

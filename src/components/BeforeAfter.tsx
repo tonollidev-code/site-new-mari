@@ -44,10 +44,10 @@ export const BeforeAfter: React.FC = () => {
           <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#8C6E5D] bg-white px-3.5 py-1 rounded-full border border-[#DFD7CD] shadow-xs">
             Resultados Reais
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mt-4 mb-3 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#3F2519] mt-4 mb-3 tracking-tight">
             Transformações que inspiram
           </h2>
-          <p className="text-base text-[#735747] font-serif italic font-normal">
+          <p className="text-base text-[#7A5E4F] font-serif italic font-normal">
             Arraste o controle para comparar o Antes e Depois do procedimento.
           </p>
         </motion.div>
@@ -67,7 +67,7 @@ export const BeforeAfter: React.FC = () => {
             onTouchStart={() => setIsDragging(true)}
             onTouchEnd={() => setIsDragging(false)}
             onTouchMove={handleTouchMove}
-            className="relative w-full h-[360px] sm:h-[480px] rounded-3xl overflow-hidden border border-[#D4AF37]/40 shadow-luxury select-none cursor-ew-resize bg-[#2C1810]"
+            className="relative w-full h-[360px] sm:h-[480px] rounded-3xl overflow-hidden border border-[#D4AF37]/40 shadow-luxury select-none cursor-ew-resize bg-[#3D251A]"
           >
             {/* After Image (Background Full View) */}
             <img
@@ -78,7 +78,7 @@ export const BeforeAfter: React.FC = () => {
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
             
-            <div className="absolute top-4 right-4 bg-[#2C1810]/90 backdrop-blur-md text-[#F5EFEB] border border-[#C5A059]/40 text-[11px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-md z-10 flex items-center gap-1.5 pointer-events-none">
+            <div className="absolute top-4 right-4 bg-[#482D1F]/90 backdrop-blur-md text-[#F5EFEB] border border-[#C5A059]/40 text-[11px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-md z-10 flex items-center gap-1.5 pointer-events-none">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
               <span>DEPOIS (Transformação Gel)</span>
             </div>
@@ -97,7 +97,7 @@ export const BeforeAfter: React.FC = () => {
                 style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%' }}
               />
 
-              <div className="absolute top-4 left-4 bg-[#1A0C06]/85 backdrop-blur-md text-white border border-white/20 text-[11px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-md z-10 pointer-events-none">
+              <div className="absolute top-4 left-4 bg-[#3D251A]/85 backdrop-blur-md text-white border border-white/20 text-[11px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-md z-10 pointer-events-none">
                 ANTES (Unhas Quebradiças)
               </div>
             </div>
@@ -108,7 +108,7 @@ export const BeforeAfter: React.FC = () => {
               style={{ left: `${sliderPosition}%` }}
             >
               <div className="w-[2px] h-full bg-[#C5A059] shadow-sm" />
-              <div className="absolute w-10 h-10 rounded-full bg-[#2C1810] border-2 border-[#C5A059] text-[#C5A059] shadow-xl flex items-center justify-center transform -translate-x-1/2">
+              <div className="absolute w-10 h-10 rounded-full bg-[#482D1F] border-2 border-[#C5A059] text-[#C5A059] shadow-xl flex items-center justify-center transform -translate-x-1/2">
                 <MoveHorizontal className="w-4 h-4" />
               </div>
             </div>
@@ -123,17 +123,17 @@ export const BeforeAfter: React.FC = () => {
             className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-[#DFD7CD] shadow-xs"
           >
             <div className="text-left">
-              <h4 className="font-serif font-bold text-[#2C1810] text-lg">
+              <h4 className="font-serif font-bold text-[#3F2519] text-lg">
                 Suas unhas também podem viver essa transformação!
               </h4>
-              <p className="text-xs text-[#6E5648] font-normal">
+              <p className="text-xs text-[#73594A] font-normal">
                 Recupere a resistência, o formato perfeito e a autoestima das suas mãos.
               </p>
             </div>
 
             <button
               onClick={() => scrollToSection('booking')}
-              className="bg-[#2C1810] hover:bg-[#3D2314] text-[#FCFAF7] px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-xs hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 shrink-0 cursor-pointer"
+              className="bg-[#482D1F] hover:bg-[#3D2418] text-[#FCFAF7] px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-xs hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 shrink-0 cursor-pointer"
             >
               <Calendar className="w-4 h-4 text-[#C5A059]" />
               <span>Quero Minha Transformação</span>
