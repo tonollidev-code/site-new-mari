@@ -77,6 +77,8 @@ export const GlassLogoBackground: React.FC = () => {
                 referrerPolicy="no-referrer"
                 alt=""
                 decoding="async"
+                loading="eager"
+                fetchPriority="high"
                 className="w-full h-full object-cover rounded-full opacity-25 sm:opacity-50 mix-blend-multiply filter sepia-[35%] sm:sepia-[60%] saturate-[115%] sm:saturate-[170%] brightness-[1.12] sm:brightness-[0.98] contrast-[95%] sm:contrast-[110%] pointer-events-none transition-all"
               />
 

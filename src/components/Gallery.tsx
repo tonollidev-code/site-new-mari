@@ -2,6 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { Maximize2, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { ProgressiveImage } from './ProgressiveImage';
 
 export const Gallery: React.FC = () => {
   const { gallery, setLightboxImage, scrollToSection } = useApp();
@@ -39,12 +40,11 @@ export const Gallery: React.FC = () => {
               className="group relative bg-white rounded-3xl overflow-hidden border border-[#EADEDA]/80 shadow-luxury hover:shadow-luxury-hover cursor-pointer transition-all duration-500 hover:-translate-y-1 p-2"
             >
               <div className="aspect-[4/5] w-full overflow-hidden rounded-2xl relative bg-[#EADEDA]/50">
-                <img
+                <ProgressiveImage
                   src={item.imageUrl}
-                  alt="Trabalho de Nail Art"
+                  alt={item.title || "Trabalho de Nail Art"}
+                  containerClassName="w-full h-full"
                   className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700 ease-out"
-                  loading="lazy"
-                  decoding="async"
                 />
 
                 {/* Refined Subtle Hover Zoom Overlay */}

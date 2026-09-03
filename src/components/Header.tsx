@@ -97,6 +97,9 @@ export const Header: React.FC = () => {
               src="https://i.postimg.cc/y6wg2q7F/Whats-App-Image-2026-08-08-at-21-38-19.jpg"
               referrerPolicy="no-referrer"
               alt="Mariana Leone Logo"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
               className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border border-[#E5C158]/60 shadow-xs group-hover:scale-105 transition-transform duration-300"
             />
             <div className="flex flex-col">

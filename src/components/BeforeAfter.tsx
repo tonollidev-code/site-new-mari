@@ -73,7 +73,8 @@ export const BeforeAfter: React.FC = () => {
             <img
               src="https://i.postimg.cc/g0zHrxt1/Whats-App-Image-2026-08-08-at-16-40-35.jpg"
               alt="Depois - Unhas Perfeitas por Mariana Leone"
-              loading="lazy"
+              referrerPolicy="no-referrer"
+              loading="eager"
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
@@ -91,7 +92,8 @@ export const BeforeAfter: React.FC = () => {
               <img
                 src="https://i.postimg.cc/QtnFmwdQ/Whats-App-Image-2026-08-09-at-19-26-22.jpg"
                 alt="Antes - Unhas curtas e quebradiças antes do procedimento"
-                loading="lazy"
+                referrerPolicy="no-referrer"
+                loading="eager"
                 decoding="async"
                 className="absolute inset-y-0 left-0 max-w-none h-full object-cover filter contrast-90 brightness-90"
                 style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%' }}

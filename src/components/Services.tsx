@@ -3,6 +3,7 @@ import { useApp } from '../context/AppContext';
 import { ServiceItem } from '../types';
 import { Clock, Calendar, Sparkles, ShieldCheck, Palette, RefreshCw, Gem, Scissors } from 'lucide-react';
 import { motion } from 'motion/react';
+import { ProgressiveImage } from './ProgressiveImage';
 
 export const Services: React.FC = () => {
   const { services, setSelectedServiceForBooking, scrollToSection } = useApp();
@@ -73,14 +74,13 @@ export const Services: React.FC = () => {
                 {/* Service Card Image or Icon Banner */}
                 {service.image ? (
                   <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-5 border border-[#EADEDA]/60 bg-[#F8F5F2]">
-                    <img
+                    <ProgressiveImage
                       src={service.image}
                       alt={service.name}
-                      loading="lazy"
-                      decoding="async"
+                      containerClassName="w-full h-full"
                       className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-xs p-2 rounded-xl border border-[#DFD7CD] shadow-xs">
+                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-xs p-2 rounded-xl border border-[#DFD7CD] shadow-xs z-20">
                       {getIcon(service.iconName)}
                     </div>
                   </div>

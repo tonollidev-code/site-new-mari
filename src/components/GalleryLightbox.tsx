@@ -35,6 +35,9 @@ export const GalleryLightbox: React.FC = () => {
         <div className="bg-black flex items-center justify-center relative min-h-[350px] max-h-[70vh]">
           <img
             src={lightboxImage.imageUrl}
+            referrerPolicy="no-referrer"
+            loading="eager"
+            decoding="async"
             alt="Trabalho de Nail Art em destaque"
             className="w-full h-full object-contain max-h-[70vh]"
           />

@@ -2,6 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { Calendar, Eye, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
+import { ProgressiveImage } from './ProgressiveImage';
 
 export const Hero: React.FC = () => {
   const { scrollToSection } = useApp();
@@ -81,13 +82,12 @@ export const Hero: React.FC = () => {
                 
                 {/* Hero Image Container */}
                 <div className="relative overflow-hidden rounded-2xl bg-[#F8F5F2]">
-                  <img
+                  <ProgressiveImage
                     src="https://i.postimg.cc/wTrHCqHZ/Whats-App-Image-2026-08-13-at-09-55-45.jpg"
-                    referrerPolicy="no-referrer"
                     alt="Unhas em gel com durabilidade feitas por Mariana Leone"
-                    loading="eager"
-                    decoding="async"
-                    className="w-full h-[390px] sm:h-[470px] object-cover transition-transform duration-700 ease-out hover:scale-103"
+                    priority={true}
+                    containerClassName="w-full h-[390px] sm:h-[470px]"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-103"
                   />
 
                   {/* Refined Glassmorphism Badge Overlay */}

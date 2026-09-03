@@ -2,6 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { Instagram, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';
+import { ProgressiveImage } from './ProgressiveImage';
 
 export const InstagramGrid: React.FC = () => {
   const { config } = useApp();
@@ -53,10 +54,10 @@ export const InstagramGrid: React.FC = () => {
             <Instagram className="w-3.5 h-3.5 text-[#C5A059]" />
             <span>Inspirações Diárias</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2C1810] mb-3 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#3F2519] mb-3 tracking-tight">
             Acompanhe no Instagram
           </h2>
-          <p className="text-base text-[#735747] font-serif italic font-normal">
+          <p className="text-base text-[#7A5E4F] font-serif italic font-normal">
             Mais inspirações, novidades e resultados no perfil {config.instagramHandle}.
           </p>
         </motion.div>
@@ -75,17 +76,16 @@ export const InstagramGrid: React.FC = () => {
               transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="group relative aspect-square rounded-2xl overflow-hidden border border-[#DFD7CD] shadow-luxury hover:shadow-luxury-hover transition-all duration-300"
             >
-              <img
+              <ProgressiveImage
                 src={post.image}
                 alt={post.title}
+                containerClassName="w-full h-full"
                 className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
-                loading="lazy"
-                decoding="async"
               />
 
               {/* Clean Luxury Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <div className="p-3 rounded-full bg-white/95 text-[#2C1810] shadow-md group-hover:scale-110 transition-transform duration-300">
+                <div className="p-3 rounded-full bg-white/95 text-[#3F2519] shadow-md group-hover:scale-110 transition-transform duration-300">
                   <Instagram className="w-4 h-4 text-[#C5A059]" />
                 </div>
               </div>
@@ -105,7 +105,7 @@ export const InstagramGrid: React.FC = () => {
             href="https://instagram.com/leonesnail"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 bg-[#2C1810] hover:bg-[#3D2314] text-[#FCFAF7] px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xs hover:shadow-md border border-[#2C1810] transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            className="inline-flex items-center gap-2.5 bg-[#482D1F] hover:bg-[#3D2418] text-[#FCFAF7] px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xs hover:shadow-md border border-[#482D1F] transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
             <Instagram className="w-4 h-4 text-[#C5A059]" />
             <span>Seguir no Instagram ({config.instagramHandle})</span>
@@ -117,3 +117,4 @@ export const InstagramGrid: React.FC = () => {
     </section>
   );
 };
+

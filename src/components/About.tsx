@@ -2,6 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { Eye, CheckCircle2, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
+import { ProgressiveImage } from './ProgressiveImage';
 
 export const About: React.FC = () => {
   const { scrollToSection } = useApp();
@@ -26,13 +27,12 @@ export const About: React.FC = () => {
               
               <div className="relative bg-white p-2.5 sm:p-3 rounded-3xl border border-[#E5C158]/35 shadow-luxury transition-all duration-500 hover:shadow-luxury-hover">
                 <div className="relative overflow-hidden rounded-2xl bg-[#EADEDA]/40">
-                  <img
+                  <ProgressiveImage
                     src="https://i.postimg.cc/sx0cCTDJ/Whats-App-Image-2026-08-08-at-16-40-36.jpg"
-                    referrerPolicy="no-referrer"
                     alt="Mariana Leone - Especialista em unhas sofisticadas"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-[430px] sm:h-[480px] object-cover transition-transform duration-700 ease-out hover:scale-103"
+                    priority={true}
+                    containerClassName="w-full h-[430px] sm:h-[480px]"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-103"
                   />
                 </div>
               </div>
